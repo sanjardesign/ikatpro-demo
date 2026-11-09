@@ -6,7 +6,8 @@
               (<slug>.mp4 — полный ролик, <slug>-teaser.mp4 — беззвучный тизер, <slug>-v.mp4 — вертикальный)
     client  — клиент, kind — формат, dur — хронометраж
     cat     — фильтр на главной: ads (реклама), corporate (корпоративное), social (соцсети), backstage (бэкстейдж)
-    videos  — ролики YouTube (id, подпись, хронометраж); если роликов несколько, на странице работы есть переключатель
+    videos  — ролики YouTube (id, подпись, хронометраж); если роликов несколько, на странице работы есть переключатель.
+              lang: "ru" | "uz" — языковая версия: по умолчанию играет версия на языке сайта (EN — русская)
     poster  — обложка (постер YouTube, скачан в assets/img/)
     frame   — чистый кадр без титров из макета (первый экран и мозаика)
     cover   — обложка без надписей превью, вырезанная из постера (assets/covers/), если нет frame
@@ -158,27 +159,21 @@ window.WORKS = [
     alt: "Врач и семьи с детьми на белом фоне",
   },
   {
-    slug: "open-budjet-ru",
+    slug: "open-budjet",
     client: "Open Budjet",
-    kind: "Ролик, RU",
+    kind: "Ролик",
     dur: "1:08",
     cat: "corporate",
-    videos: [{ id: "lwlU5npKf6E", dur: "1:08" }],
+    // Две языковые версии одного ролика: на странице работы сразу играет версия на языке сайта.
+    videos: [
+      { id: "lwlU5npKf6E", lang: "ru", dur: "1:08" },
+      { id: "vPj9xmrb0F0", lang: "uz", dur: "1:08" },
+    ],
     poster: "assets/img/lwlU5npKf6E.jpg",
     cover: "assets/covers/lwlU5npKf6E.jpg",
     alt: "Пожилая женщина с кувшином, ролик Open Budjet",
   },
-  {
-    slug: "open-budjet-uz",
-    client: "Open Budjet",
-    kind: "Ролик, UZ",
-    dur: "1:08",
-    cat: "corporate",
-    videos: [{ id: "vPj9xmrb0F0", dur: "1:08" }],
-    poster: "assets/img/vPj9xmrb0F0.jpg",
-    cover: "assets/covers/vPj9xmrb0F0.jpg",
-    alt: "Пожилая женщина с кувшином, узбекская версия ролика Open Budjet",
-  },
+
   {
     slug: "hpc",
     client: "HPC — ЖК в Каканде",
@@ -252,7 +247,11 @@ window.FEATURED = ["komatsu", "aion", "mannol", "indorama-oltin", "merci", "show
 
 window.CATS = { ads: "Реклама", corporate: "Корпоративное", social: "Соцсети", backstage: "Бэкстейдж" };
 
+// Старые адреса языковых версий ведут на общую страницу работы.
+window.ALIASES = { "open-budjet-ru": "open-budjet", "open-budjet-uz": "open-budjet" };
+
 window.workBySlug = function (slug) {
+  slug = window.ALIASES[slug] || slug;
   for (var i = 0; i < window.WORKS.length; i++) if (window.WORKS[i].slug === slug) return window.WORKS[i];
   return null;
 };

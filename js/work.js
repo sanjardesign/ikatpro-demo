@@ -57,6 +57,12 @@
     infoBtn.setAttribute("aria-expanded", String(open));
   });
 
+  // Языковая версия ролика по умолчанию: узбекский сайт — UZ, остальные — RU.
+  var ep = 0;
+  w.videos.forEach(function (v, i) {
+    if (v.lang && v.lang === (window.LANG === "uz" ? "uz" : "ru")) ep = i;
+  });
+
   // ——— Разметка страницы ———
   var idx = window.WORKS.indexOf(w);
   var next = window.WORKS[(idx + 1) % window.WORKS.length];
@@ -67,20 +73,20 @@
     '<section aria-label="Ролик">' +
     '<div class="player">' +
     '<button type="button" class="player-poster" aria-label="' + t("wp.play") + ": " + esc(client) + '">' +
-    '<img src="' + w.poster + '" alt="' + esc(w.alt) + '" width="1280" height="720" fetchpriority="high">' +
+    '<img src="assets/img/' + w.videos[ep].id + '.jpg" alt="' + esc(w.alt) + '" width="1280" height="720" fetchpriority="high">' +
     '<span class="play-ico" aria-hidden="true"></span></button>' +
     "</div>" +
     (w.videos.length > 1
       ? '<div class="episodes" role="group" aria-label="' + t("wp.episodes") + '">' +
         w.videos
           .map(function (v, i) {
-            return '<button type="button" class="chip" aria-pressed="' + (i === 0) + '" data-ep="' + i + '">' + esc(v.label || t("wp.clip") + " " + (i + 1)) + " · " + v.dur + "</button>";
+            return '<button type="button" class="chip" aria-pressed="' + (i === ep) + '" data-ep="' + i + '">' + esc(v.lang ? t("ver." + v.lang) : v.label || t("wp.clip") + " " + (i + 1)) + " · " + v.dur + "</button>";
           })
           .join("") +
         "</div>"
       : "") +
     '<div class="wp-under"><span>' + esc(client) + " · " + esc(kind) + " · " + w.dur + "</span>" +
-    '<a class="yt-link" href="https://www.youtube.com/watch?v=' + w.videos[0].id + '" target="_blank" rel="noopener">' + t("wp.youtube") + "</a></div>" +
+    '<a class="yt-link" href="https://www.youtube.com/watch?v=' + w.videos[ep].id + '" target="_blank" rel="noopener">' + t("wp.youtube") + "</a></div>" +
     "</section>" +
     '<article class="case">' +
     '<span class="eyebrow rv">' + t("wp.industry") + " · " + esc(tCat(w.cat)) + "</span>" +
@@ -123,8 +129,6 @@
   // ——— Плеер ———
   var player = $(".player");
   var ytLink = $(".yt-link");
-  var ep = 0;
-
   function fmt(t) {
     if (!isFinite(t)) return "0:00";
     var m = Math.floor(t / 60);
@@ -139,10 +143,11 @@
       'title="' + esc(client + " — " + kind) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
   }
 
-  // Свой mp4 есть только для первого ролика проекта: assets/video/<slug>.mp4.
+  // Свой mp4: assets/video/<slug>.mp4 для первого ролика, <slug>-ru.mp4 / <slug>-uz.mp4 для языковых версий.
   function play() {
     window.track("video_play", { slug: w.slug, episode: ep + 1 });
-    if (ep > 0) {
+    var cur = w.videos[ep];
+    if (!cur.lang && ep > 0) {
       youtube();
       return;
     }
@@ -160,7 +165,7 @@
       decided = true;
       nativePlayer(v);
     });
-    v.src = "assets/video/" + w.slug + ".mp4";
+    v.src = "assets/video/" + w.slug + (cur.lang ? "-" + cur.lang : "") + ".mp4";
   }
 
   function nativePlayer(v) {

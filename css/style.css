@@ -908,20 +908,20 @@ button {
 
 .ftr-big {
   display: block;
-  padding: 72px var(--pad) 40px;
+  padding: 80px var(--pad) 56px;
 }
 
 .ftr-big .eyebrow {
   display: block;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
 }
 
 .ftr-big-t {
   display: block;
   font-size: clamp(48px, 8.6vw, 140px);
   font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   transition: opacity 0.3s;
 }
