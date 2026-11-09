@@ -585,8 +585,8 @@ button {
 
 .mq-group {
   display: flex;
-  gap: 34px;
-  padding-right: 34px;
+  gap: 22px;
+  padding-right: 22px;
 }
 
 .mq-group {
@@ -2430,4 +2430,42 @@ button {
   .client-logo.sq img {
     height: 34px;
   }
+}
+
+/* ——— Логотипы клиентов: цветные при наведении ——— */
+
+.client-logo {
+  position: relative;
+  display: block;
+  padding: 10px 16px;
+  border-radius: 14px;
+  transition: background-color 0.35s ease;
+}
+
+.client-logo img {
+  transition: opacity 0.35s ease;
+}
+
+.client-logo .cl-c {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+.client-logo:hover {
+  background: #f2f0eb;
+}
+
+.client-logo:hover .cl-w {
+  opacity: 0;
+}
+
+.client-logo:hover .cl-c {
+  opacity: 1;
+}
+
+.client-logo.np:hover {
+  background: transparent;
 }

@@ -257,12 +257,13 @@ window.workBySlug = function (slug) {
 };
 
 // Клиенты для бегущей строки на главной. Логотипы — с ikatpro.uz, перекрашены в белый (assets/clients/).
+// noPlate: цветной логотип и так хорошо виден на чёрном — без светлой плашки при наведении.
 // square: знак почти квадратный — показываем чуть крупнее, чтобы по весу совпадал со словесными логотипами.
 window.CLIENTS = [
   { name: "Komatsu", logo: null },
   { name: "Asakabank", logo: "assets/clients/asakabank.png" },
   { name: "Indorama", logo: "assets/clients/indorama.png" },
-  { name: "Mannol", logo: "assets/clients/mannol.png" },
+  { name: "Mannol", logo: "assets/clients/mannol.png", noPlate: true },
   { name: "AION", logo: "assets/clients/aion.png", square: true },
   { name: "Biolife", logo: "assets/clients/biolife.png" },
   { name: "Saxovat", logo: "assets/clients/saxovat.png", square: true },
