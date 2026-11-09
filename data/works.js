@@ -8,7 +8,8 @@
     cat     — фильтр на главной: ads (реклама), corporate (корпоративное), social (соцсети), backstage (бэкстейдж)
     videos  — ролики YouTube (id, подпись, хронометраж); если роликов несколько, на странице работы есть переключатель
     poster  — обложка (постер YouTube, скачан в assets/img/)
-    frame   — чистый кадр без титров для первого экрана и мозаики (если есть)
+    frame   — чистый кадр без титров из макета (первый экран и мозаика)
+    cover   — обложка без надписей превью, вырезанная из постера (assets/covers/), если нет frame
     frames  — два кадра для кейса; пока не заданы, на их месте плейсхолдеры
     alt     — описание кадра для экранных дикторов
 */
@@ -107,6 +108,7 @@ window.WORKS = [
       { id: "VjDtSwXtJs4", label: "Серия 3", dur: "0:16" },
     ],
     poster: "assets/img/RSguq3X2KqI.jpg",
+    cover: "assets/covers/RSguq3X2KqI.jpg",
     alt: "Ведущий в зелёной рубашке у полки с продукцией Saxovat",
   },
   {
@@ -127,6 +129,7 @@ window.WORKS = [
     cat: "ads",
     videos: [{ id: "5W2cNBVgJtk", dur: "0:30" }],
     poster: "assets/img/5W2cNBVgJtk.jpg",
+    cover: "assets/covers/5W2cNBVgJtk.jpg",
     alt: "Мужчина с пультом в светлой гостиной",
   },
   {
@@ -137,6 +140,7 @@ window.WORKS = [
     cat: "ads",
     videos: [{ id: "A9B2lKN9deE", dur: "0:31" }],
     poster: "assets/img/A9B2lKN9deE.jpg",
+    cover: "assets/covers/A9B2lKN9deE.jpg",
     alt: "Девушка у стола с цветами",
   },
   {
@@ -161,6 +165,7 @@ window.WORKS = [
     cat: "corporate",
     videos: [{ id: "lwlU5npKf6E", dur: "1:08" }],
     poster: "assets/img/lwlU5npKf6E.jpg",
+    cover: "assets/covers/lwlU5npKf6E.jpg",
     alt: "Пожилая женщина с кувшином, ролик Open Budjet",
   },
   {
@@ -171,6 +176,7 @@ window.WORKS = [
     cat: "corporate",
     videos: [{ id: "vPj9xmrb0F0", dur: "1:08" }],
     poster: "assets/img/vPj9xmrb0F0.jpg",
+    cover: "assets/covers/vPj9xmrb0F0.jpg",
     alt: "Пожилая женщина с кувшином, узбекская версия ролика Open Budjet",
   },
   {
@@ -191,6 +197,7 @@ window.WORKS = [
     cat: "backstage",
     videos: [{ id: "kU4gRYrKP-w", dur: "1:06" }],
     poster: "assets/img/kU4gRYrKP-w.jpg",
+    cover: "assets/covers/kU4gRYrKP-w.jpg",
     alt: "Оператор со стабилизатором на съёмке AION",
   },
   {
@@ -201,27 +208,8 @@ window.WORKS = [
     cat: "backstage",
     videos: [{ id: "ms_ZSMufZZA", dur: "2:34" }],
     poster: "assets/img/ms_ZSMufZZA.jpg",
+    cover: "assets/covers/ms_ZSMufZZA.jpg",
     alt: "Съёмочная группа на снегу при минус 23",
-  },
-  {
-    slug: "biolife-backstage",
-    client: "Biolife",
-    kind: "Бэкстейдж",
-    dur: "1:10",
-    cat: "backstage",
-    videos: [{ id: "uAcbnyU7tfM", dur: "1:10" }],
-    poster: "assets/img/uAcbnyU7tfM.jpg",
-    alt: "Актёр смеётся на съёмочной площадке Biolife",
-  },
-  {
-    slug: "eclair-backstage",
-    client: "Eclair",
-    kind: "Бэкстейдж",
-    dur: "0:59",
-    cat: "backstage",
-    videos: [{ id: "P1Elge2uDvI", dur: "0:59" }],
-    poster: "assets/img/P1Elge2uDvI.jpg",
-    alt: "Съёмка на кухне Eclair",
   },
   {
     slug: "crafers-backstage",
@@ -232,6 +220,27 @@ window.WORKS = [
     videos: [{ id: "D-JqrXoXZ44", dur: "0:50" }],
     poster: "assets/img/D-JqrXoXZ44.jpg",
     alt: "Дети и взрослый играют в шахматы на съёмке Crafers",
+  },
+  {
+    slug: "eclair-backstage",
+    client: "Eclair",
+    kind: "Бэкстейдж",
+    dur: "0:59",
+    cat: "backstage",
+    videos: [{ id: "P1Elge2uDvI", dur: "0:59" }],
+    poster: "assets/img/P1Elge2uDvI.jpg",
+    cover: "assets/covers/P1Elge2uDvI.jpg",
+    alt: "Съёмка на кухне Eclair",
+  },
+  {
+    slug: "biolife-backstage",
+    client: "Biolife",
+    kind: "Бэкстейдж",
+    dur: "1:10",
+    cat: "backstage",
+    videos: [{ id: "uAcbnyU7tfM", dur: "1:10" }],
+    poster: "assets/img/uAcbnyU7tfM.jpg",
+    alt: "Актёр смеётся на съёмочной площадке Biolife",
   },
 ];
 
@@ -248,15 +257,18 @@ window.workBySlug = function (slug) {
   return null;
 };
 
-// Клиенты для бегущей строки на главной. logo — файл в assets/clients/ (белый или любой: на сайте он перекрашивается в белый).
+// Клиенты для бегущей строки на главной. Логотипы — с ikatpro.uz, перекрашены в белый (assets/clients/).
+// square: знак почти квадратный — показываем чуть крупнее, чтобы по весу совпадал со словесными логотипами.
 window.CLIENTS = [
   { name: "Komatsu", logo: null },
-  { name: "Asakabank", logo: null },
-  { name: "Indorama", logo: null },
-  { name: "Mannol", logo: null },
-  { name: "AION", logo: null },
-  { name: "Biolife", logo: null },
-  { name: "Saxovat", logo: null },
+  { name: "Asakabank", logo: "assets/clients/asakabank.png" },
+  { name: "Indorama", logo: "assets/clients/indorama.png" },
+  { name: "Mannol", logo: "assets/clients/mannol.png" },
+  { name: "AION", logo: "assets/clients/aion.png", square: true },
+  { name: "Biolife", logo: "assets/clients/biolife.png" },
+  { name: "Saxovat", logo: "assets/clients/saxovat.png", square: true },
+  { name: "N'Medov", logo: "assets/clients/nmedov.png", square: true },
+  { name: "SCC", logo: "assets/clients/scc.png", square: true },
   { name: "Merci", logo: null },
   { name: "Eclair", logo: null },
   { name: "Landor", logo: null },

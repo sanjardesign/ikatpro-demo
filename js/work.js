@@ -111,7 +111,7 @@
     '<button type="button" class="btn btn-line" data-form="' + (w.cat === "social" ? "Контент для соцсетей" : "Рекламный ролик") + '">' + t("cta.full") + ' <span class="arr" aria-hidden="true">→</span></button>' +
     "</div></section>" +
     '<a class="next" href="work.html?w=' + next.slug + '">' +
-    '<img src="' + (next.frame || next.poster) + '" alt="" width="1280" height="720" loading="lazy">' +
+    '<img src="' + (next.frame || next.cover || next.poster) + '" alt="" width="1280" height="720" loading="lazy">' +
     '<span class="next-cap"><span class="eyebrow">' + t("wp.next") + "</span><strong>" + esc(tName(next.client)) + " ↗</strong>" +
     '<span class="cap" style="display:block;margin-top:8px;font-size:12px">' + esc(tKind(next.kind)) + " · " + next.dur + "</span></span></a>" +
     "</article>";

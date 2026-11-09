@@ -576,7 +576,7 @@ button {
   letter-spacing: 0.02em;
   text-transform: uppercase;
   white-space: nowrap;
-  animation: mq 40s linear infinite;
+  animation: mq 50s linear infinite;
 }
 
 .mq:hover .mq-track {
@@ -606,9 +606,15 @@ button {
   height: 32px;
   max-width: 160px;
   object-fit: contain;
-  /* Любой логотип становится белым, чтобы лента была монохромной. */
-  filter: brightness(0) invert(1);
   opacity: 0.9;
+}
+
+.client-logo.sq img {
+  height: 46px;
+}
+
+.client-name {
+  white-space: nowrap;
 }
 
 @keyframes mq {
@@ -2294,5 +2300,134 @@ button {
 
   .dock a {
     padding: 0 10px;
+  }
+}
+
+/* ——— Обложки работ в стиле продакшн-студий ——— */
+
+/* Кадр чуть приглушён, при наведении — полная яркость и лёгкий наезд. */
+.tile img {
+  filter: brightness(0.78) saturate(0.92);
+  transition: transform 1.2s var(--ease), filter 0.6s ease, opacity 0.4s;
+}
+
+.tile:hover img,
+.tile:focus-visible img {
+  filter: brightness(1) saturate(1);
+}
+
+.tile::after {
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.25) 55%, rgba(0, 0, 0, 0));
+}
+
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  height: 30%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+
+.tile-top {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  right: 18px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tile-n {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tile-n::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: width 0.5s var(--ease);
+}
+
+.tile:hover .tile-n::after {
+  width: 48px;
+}
+
+.tile-tag {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tile-cap {
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-shadow: none;
+}
+
+.tile-client {
+  display: block;
+  font-size: clamp(20px, 1.9vw, 32px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  transition: transform 0.5s var(--ease);
+}
+
+.r2 .tile-client {
+  font-size: clamp(24px, 2.6vw, 44px);
+}
+
+.r1 .tile-client {
+  font-size: clamp(30px, 4.4vw, 72px);
+}
+
+.tile-cap .tile-meta {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tile:hover .tile-client {
+  transform: translateY(-3px);
+}
+
+/* «Превью» — справа снизу, напротив подписи. */
+.tile-pv {
+  top: auto;
+  bottom: 18px;
+  z-index: 2;
+  background: #fff;
+  color: #000;
+}
+
+@media (max-width: 760px) {
+  .tile-pv {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .client-logo img {
+    height: 24px;
+  }
+
+  .client-logo.sq img {
+    height: 34px;
   }
 }

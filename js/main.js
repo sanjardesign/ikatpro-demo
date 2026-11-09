@@ -119,7 +119,7 @@
       .map(function (w, i) {
         return (
           '<div class="hero-slide" data-i="' + i + '">' +
-          '<img src="' + (w.frame || w.poster) + '" alt="' + esc(w.alt) + '" width="1280" height="720"' +
+          '<img src="' + (w.frame || w.cover || w.poster) + '" alt="' + esc(w.alt) + '" width="1280" height="720"' +
           (i === 0 ? ' fetchpriority="high"' : ' loading="lazy"') + ">" +
           "</div>"
         );
@@ -256,7 +256,7 @@
     var group = (window.CLIENTS || [])
       .map(function (c) {
         var item = c.logo
-          ? '<span class="client-logo"><img src="' + c.logo + '" alt="' + esc(c.name) + '" height="40" loading="lazy" decoding="async"></span>'
+          ? '<span class="client-logo' + (c.square ? " sq" : "") + '"><img src="' + c.logo + '" alt="' + esc(c.name) + '" height="40" loading="lazy" decoding="async"></span>'
           : '<span class="client-name">' + esc(c.name) + "</span>";
         return item + drop;
       })
@@ -279,9 +279,14 @@
     function tile(w, big) {
       return (
         '<a class="tile rv" href="work.html?w=' + w.slug + '" data-slug="' + w.slug + '">' +
-        '<img src="' + (w.frame || w.poster) + '" alt="' + esc(w.alt) + '" width="1280" height="720" loading="lazy" decoding="async">' +
+        '<img src="' + (w.frame || w.cover || w.poster) + '" alt="' + esc(w.alt) + '" width="1280" height="720" loading="lazy" decoding="async">' +
+        // Подпись как у продакшн-студий: номер и категория сверху, крупный клиент и формат снизу.
+        '<span class="tile-top cap" aria-hidden="true"><span class="tile-n">' +
+        String(window.WORKS.indexOf(w) + 1).padStart(2, "0") +
+        '</span><span class="tile-tag">' + esc(tCat(w.cat)) + "</span></span>" +
+        '<span class="tile-cap"><strong class="tile-client">' + esc(tName(w.client)) + "</strong>" +
+        '<span class="tile-meta cap">' + esc(tKind(w.kind)) + " · " + w.dur + "</span></span>" +
         '<span class="tile-pv cap" aria-hidden="true">' + t("preview") + "</span>" +
-        '<span class="tile-cap cap">' + esc(tName(w.client)) + "<span>" + esc(tKind(w.kind)) + (big ? " · " + w.dur : "") + "</span></span>" +
         "</a>"
       );
     }
