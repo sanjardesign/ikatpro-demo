@@ -13,31 +13,31 @@
   modal.setAttribute("aria-hidden", "true");
   modal.innerHTML =
     '<div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="form-title" tabindex="-1">' +
-    '<button type="button" class="modal-x" aria-label="Закрыть">×</button>' +
+    '<button type="button" class="modal-x" aria-label="' + t("close") + '">×</button>' +
     '<form class="form" novalidate>' +
     "<div>" +
-    '<h2 class="form-title" id="form-title">Обсудить проект</h2>' +
-    '<p class="form-lead">Три поля — и продюсер ответит в течение рабочего дня.</p>' +
+    '<h2 class="form-title" id="form-title">' + t("form.title") + "</h2>" +
+    '<p class="form-lead">' + t("form.lead") + "</p>" +
     "</div>" +
-    '<fieldset class="kinds"><legend class="sr-only">Тип проекта</legend>' +
-    KINDS.map(function (k) {
-      return '<button type="button" class="chip" aria-pressed="false" data-kind="' + k + '">' + k + "</button>";
+    '<fieldset class="kinds"><legend class="sr-only">' + t("form.kind") + "</legend>" +
+    KINDS.map(function (k, i) {
+      return '<button type="button" class="chip" aria-pressed="false" data-kind="' + k + '">' + t("kind." + i) + "</button>";
     }).join("") +
     "</fieldset>" +
-    field("name", "Имя и компания", "text", "organization") +
-    field("contact", "Телефон или Telegram", "text", "tel") +
-    field("task", "Задача в двух словах", "text", "off") +
+    field("name", t("form.name"), "text", "organization") +
+    field("contact", t("form.contact"), "text", "tel") +
+    field("task", t("form.task"), "text", "off") +
     '<div class="form-actions">' +
-    '<button type="submit" class="btn btn-white">Отправить</button>' +
-    '<a class="btn btn-line" href="https://t.me/Ikat_pro_ad?start=site" target="_blank" rel="noopener" data-tg="form">Или в Telegram ↗</a>' +
+    '<button type="submit" class="btn btn-white">' + t("form.send") + "</button>" +
+    '<a class="btn btn-line" href="https://t.me/Ikat_pro_ad?start=site" target="_blank" rel="noopener" data-tg="form">' + t("form.tg") + "</a>" +
     "</div>" +
-    '<a class="form-brief" href="#" title="[страница брифа позже]">Подробный бриф · 3 мин <span class="ph">[страница брифа позже]</span></a>' +
+    '<a class="form-brief" href="#" title="' + t("form.briefLater") + '">' + t("form.brief") + ' <span class="ph">' + t("form.briefLater") + "</span></a>" +
     "</form>" +
     '<div class="thanks out" hidden aria-live="polite">' +
     '<span class="thanks-mark" aria-hidden="true">✓</span>' +
-    '<h2 class="form-title">Спасибо!</h2>' +
-    "<p>Продюсер ответит в течение рабочего дня.</p>" +
-    '<button type="button" class="btn btn-line" data-close>Закрыть</button>' +
+    '<h2 class="form-title">' + t("form.thanks") + "</h2>" +
+    "<p>" + t("form.thanksText") + "</p>" +
+    '<button type="button" class="btn btn-line" data-close>' + t("close") + "</button>" +
     "</div>" +
     "</div>";
   document.body.appendChild(modal);
@@ -108,11 +108,7 @@
 
   function validate() {
     var ok = true;
-    var msgs = {
-      name: "Напишите, как к вам обращаться",
-      contact: "Нужен телефон или ник в Telegram",
-      task: "Пара слов о задаче",
-    };
+    var msgs = { name: t("err.name"), contact: t("err.contact"), task: t("err.task") };
     form.querySelectorAll(".field").forEach(function (f) {
       var inp = f.querySelector("input");
       var v = inp.value.trim();
@@ -149,6 +145,7 @@
       utm: window.IKAT_UTM || {},
       headline_variant: window.IKAT_HEADLINE || null,
       page: location.pathname + location.search,
+      lang: window.LANG,
       sent_at: new Date().toISOString(),
     };
     // TODO: отправить lead на реальный адрес (CRM, Telegram-бот или почта), когда появится бэкенд.

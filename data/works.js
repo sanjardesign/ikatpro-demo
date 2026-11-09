@@ -247,3 +247,20 @@ window.workBySlug = function (slug) {
   for (var i = 0; i < window.WORKS.length; i++) if (window.WORKS[i].slug === slug) return window.WORKS[i];
   return null;
 };
+
+// Клиенты для бегущей строки на главной. logo — файл в assets/clients/ (белый или любой: на сайте он перекрашивается в белый).
+window.CLIENTS = [
+  { name: "Komatsu", logo: null },
+  { name: "Asakabank", logo: null },
+  { name: "Indorama", logo: null },
+  { name: "Mannol", logo: null },
+  { name: "AION", logo: null },
+  { name: "Biolife", logo: null },
+  { name: "Saxovat", logo: null },
+  { name: "Merci", logo: null },
+  { name: "Eclair", logo: null },
+  { name: "Landor", logo: null },
+  { name: "Avangard", logo: null },
+  { name: "Open Budjet", logo: null },
+  { name: "HPC", logo: null },
+];

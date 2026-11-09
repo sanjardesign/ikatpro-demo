@@ -38,13 +38,6 @@
     }, 2200);
   }
 
-  // ——— Языки: RU основной, UZ и EN пока без перевода ———
-  document.addEventListener("click", function (e) {
-    var b = e.target.closest("[data-lang]");
-    if (!b) return;
-    var l = b.getAttribute("data-lang");
-    if (l !== "ru") toast(l.toUpperCase() + ": [перевод позже]");
-  });
 
   // ——— Учёт кликов ———
   document.addEventListener("click", function (e) {
@@ -90,11 +83,7 @@
 
   function initHero() {
     // A/B-тест заголовка: вариант выбирается один раз и запоминается.
-    var heads = [
-      "Видео, которое\nдосматривают",
-      "Реклама и фильмы\nдля брендов Узбекистана",
-      "От идеи\nдо готового ролика",
-    ];
+    var heads = [t("head1"), t("head2"), t("head3")];
     var v = null;
     try {
       v = localStorage.getItem("ikat_headline");
@@ -139,7 +128,7 @@
     nums.innerHTML = works
       .map(function (w, i) {
         return (
-          '<button type="button" class="num" aria-pressed="false" aria-label="' + (i + 1) + ": " + esc(w.client) + '">' +
+          '<button type="button" class="num" aria-pressed="false" aria-label="' + (i + 1) + ": " + esc(tName(w.client)) + '">' +
           '<span class="num-k">' + String(i + 1).padStart(2, "0") + "</span>" +
           '<span class="bar"><span class="prog"></span></span></button>'
         );
@@ -154,8 +143,8 @@
 
     function setCaption(w) {
       cap.href = "work.html?w=" + w.slug;
-      $(".hcap-name", cap).textContent = w.client;
-      $(".hcap-meta", cap).textContent = w.kind + " · " + w.dur + " · Смотреть ↗";
+      $(".hcap-name", cap).textContent = tName(w.client);
+      $(".hcap-meta", cap).textContent = tKind(w.kind) + " · " + w.dur + " · " + t("watch") + " ↗";
     }
 
     // Беззвучный тизер, если файл лежит в assets/video/<slug>-teaser.mp4.
@@ -260,10 +249,16 @@
   // ——— Бегущая строка клиентов ———
   var mq = $(".mq-track");
   if (mq) {
-    var clients = ["Komatsu", "Asakabank", "Indorama", "Mannol", "AION", "Biolife", "Saxovat", "Merci", "Eclair", "Landor", "Avangard", "Open Budjet", "HPC"];
-    var group = clients
+    // Разделитель — капля из логотипа IKAT PRO.
+    var drop =
+      '<svg class="drop" viewBox="0 0 90 140" aria-hidden="true" focusable="false"><path transform="translate(0 -92.7)" d="M44.8842 231.914C38.1457 206.103 0.384598 199.492 0.00317654 166.053C-0.378245 128.418 33.6958 131.978 44.8842 93.4527C56.0725 132.105 90.1458 128.418 89.7644 166.053C89.383 199.619 51.6226 206.103 44.8842 231.914Z"/></svg>';
+    // Логотип клиента, если файл есть (window.CLIENTS в data/works.js), иначе название текстом.
+    var group = (window.CLIENTS || [])
       .map(function (c) {
-        return "<span>" + c + '</span><span class="star" aria-hidden="true">✦</span>';
+        var item = c.logo
+          ? '<span class="client-logo"><img src="' + c.logo + '" alt="' + esc(c.name) + '" height="40" loading="lazy" decoding="async"></span>'
+          : '<span class="client-name">' + esc(c.name) + "</span>";
+        return item + drop;
       })
       .join("");
     // Два одинаковых трека подряд: сдвиг на −50% даёт бесконечную ленту без стыка.
@@ -285,8 +280,8 @@
       return (
         '<a class="tile rv" href="work.html?w=' + w.slug + '" data-slug="' + w.slug + '">' +
         '<img src="' + (w.frame || w.poster) + '" alt="' + esc(w.alt) + '" width="1280" height="720" loading="lazy" decoding="async">' +
-        '<span class="tile-pv cap" aria-hidden="true">▶ Превью</span>' +
-        '<span class="tile-cap cap">' + esc(w.client) + "<span>" + esc(w.kind) + (big ? " · " + w.dur : "") + "</span></span>" +
+        '<span class="tile-pv cap" aria-hidden="true">' + t("preview") + "</span>" +
+        '<span class="tile-cap cap">' + esc(tName(w.client)) + "<span>" + esc(tKind(w.kind)) + (big ? " · " + w.dur : "") + "</span></span>" +
         "</a>"
       );
     }
@@ -317,7 +312,7 @@
         i += n;
         p++;
       }
-      mosaic.innerHTML = html || '<p class="works-empty">[работ в этой категории пока нет]</p>';
+      mosaic.innerHTML = html || '<p class="works-empty">' + t("works.empty") + "</p>";
       more.hidden = filter !== "all" || expanded;
       reveal(mosaic);
       bindPreviews();
@@ -382,9 +377,20 @@
   var team = $(".team");
   if (team) {
     var bgs = $$(".team-bg img", team);
+    var photos = $$(".team-photo img", team);
     var people = $$(".person", team);
+    // Имена и должности на узбекском и английском лежат в data-атрибутах кнопок.
+    if (window.LANG !== "ru") {
+      people.forEach(function (p) {
+        $(".person-name", p).textContent = p.getAttribute("data-name-" + window.LANG);
+        $(".person-role", p).textContent = p.getAttribute("data-role-" + window.LANG);
+      });
+    }
     function pick(i) {
       bgs.forEach(function (b, k) {
+        b.classList.toggle("on", k === i);
+      });
+      photos.forEach(function (b, k) {
         b.classList.toggle("on", k === i);
       });
       people.forEach(function (p, k) {

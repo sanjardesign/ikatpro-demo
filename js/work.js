@@ -21,25 +21,27 @@
     document.title = "Работа не найдена — IKAT PRO";
     $(".wp-tools .icon-btn").hidden = true;
     body.innerHTML =
-      '<section class="notfound"><span class="eyebrow">404</span><h1 class="case-title">Такой работы нет</h1>' +
-      '<p style="margin-top:24px"><a class="btn btn-white" href="index.html#work">Все работы <span class="arr" aria-hidden="true">→</span></a></p></section>';
+      '<section class="notfound"><span class="eyebrow">404</span><h1 class="case-title">' + t("wp.404") + "</h1>" +
+      '<p style="margin-top:24px"><a class="btn btn-white" href="index.html#work">' + t("wp.all") + ' <span class="arr" aria-hidden="true">→</span></a></p></section>';
     return;
   }
 
-  document.title = w.client + " — " + w.kind + " — IKAT PRO";
+  var client = tName(w.client);
+  var kind = tKind(w.kind);
+  document.title = client + " — " + kind + " — IKAT PRO";
   var meta = document.querySelector('meta[name="description"]');
   if (meta) meta.setAttribute("content", w.client + ": " + w.kind.toLowerCase() + ", " + w.dur + ". Видеопродакшн IKAT PRO, Ташкент.");
-  $(".wp-name").textContent = w.client;
-  $(".wp-kind").textContent = "· " + w.kind;
+  $(".wp-name").textContent = client;
+  $(".wp-kind").textContent = "· " + kind;
 
   // ——— Титры ———
   var credits = [
-    ["Клиент", w.client],
-    ["Режиссёр", "[имя]"],
-    ["Оператор", "[имя]"],
-    ["Монтаж и цвет", "[имя]"],
-    ["Продюсер", "[имя]"],
-    ["Хронометраж", w.dur],
+    [t("wp.client"), client],
+    [t("wp.director"), t("wp.name")],
+    [t("wp.dop"), t("wp.name")],
+    [t("wp.edit"), t("wp.name")],
+    [t("wp.producer"), t("wp.name")],
+    [t("wp.dur"), w.dur],
   ];
   $(".credits dl").innerHTML = credits
     .map(function (c) {
@@ -64,54 +66,54 @@
   body.innerHTML =
     '<section aria-label="Ролик">' +
     '<div class="player">' +
-    '<button type="button" class="player-poster" aria-label="Смотреть ролик: ' + esc(w.client) + '">' +
+    '<button type="button" class="player-poster" aria-label="' + t("wp.play") + ": " + esc(client) + '">' +
     '<img src="' + w.poster + '" alt="' + esc(w.alt) + '" width="1280" height="720" fetchpriority="high">' +
     '<span class="play-ico" aria-hidden="true"></span></button>' +
     "</div>" +
     (w.videos.length > 1
-      ? '<div class="episodes" role="group" aria-label="Ролики проекта">' +
+      ? '<div class="episodes" role="group" aria-label="' + t("wp.episodes") + '">' +
         w.videos
           .map(function (v, i) {
-            return '<button type="button" class="chip" aria-pressed="' + (i === 0) + '" data-ep="' + i + '">' + esc(v.label || "Ролик " + (i + 1)) + " · " + v.dur + "</button>";
+            return '<button type="button" class="chip" aria-pressed="' + (i === 0) + '" data-ep="' + i + '">' + esc(v.label || t("wp.clip") + " " + (i + 1)) + " · " + v.dur + "</button>";
           })
           .join("") +
         "</div>"
       : "") +
-    '<div class="wp-under"><span>' + esc(w.client) + " · " + esc(w.kind) + " · " + w.dur + "</span>" +
-    '<a class="yt-link" href="https://www.youtube.com/watch?v=' + w.videos[0].id + '" target="_blank" rel="noopener">Смотреть на YouTube ↗</a></div>' +
+    '<div class="wp-under"><span>' + esc(client) + " · " + esc(kind) + " · " + w.dur + "</span>" +
+    '<a class="yt-link" href="https://www.youtube.com/watch?v=' + w.videos[0].id + '" target="_blank" rel="noopener">' + t("wp.youtube") + "</a></div>" +
     "</section>" +
     '<article class="case">' +
-    '<span class="eyebrow rv">[Отрасль] · ' + esc(window.CATS[w.cat] || "") + "</span>" +
-    '<h1 class="case-title rv">' + esc(w.client) + ': <span class="ph">[заголовок-результат]</span></h1>' +
+    '<span class="eyebrow rv">' + t("wp.industry") + " · " + esc(tCat(w.cat)) + "</span>" +
+    '<h1 class="case-title rv">' + esc(client) + ': <span class="ph">' + t("wp.result") + "</span></h1>" +
     '<div class="stats" data-stagger>' +
-    '<div class="stat rv"><span class="stat-v ph">[0,0 млн]</span><span class="stat-l">[что посчитали: просмотры, охват]</span></div>' +
-    '<div class="stat rv"><span class="stat-v ph">[00 %]</span><span class="stat-l">[второй результат: досмотры, заявки]</span></div>' +
+    '<div class="stat rv"><span class="stat-v ph">[0,0 млн]</span><span class="stat-l">' + t("wp.stat1") + '</span></div>' +
+    '<div class="stat rv"><span class="stat-v ph">[00 %]</span><span class="stat-l">' + t("wp.stat2") + '</span></div>' +
     "</div>" +
     '<ol class="steps" data-stagger>' +
-    step("01", "Задача", "[что хотел клиент и для кого ролик]") +
-    step("02", "Идея", "[главная мысль и как её показали]") +
-    step("03", "Съёмка", "[где снимали, сколько смен, техника]") +
-    step("04", "Результат", "[что получил клиент]") +
+    step("01", t("wp.s1"), t("wp.s1t")) +
+    step("02", t("wp.s2"), t("wp.s2t")) +
+    step("03", t("wp.s3"), t("wp.s3t")) +
+    step("04", t("wp.s4"), t("wp.s4t")) +
     "</ol>" +
     '<div class="frames" data-stagger>' +
     [0, 1]
       .map(function (i) {
         return frames[i]
-          ? '<figure class="frame rv" style="margin:0"><img src="' + frames[i] + '" alt="Кадр ' + (i + 1) + " из ролика " + esc(w.client) + '" width="800" height="450" loading="lazy"></figure>'
-          : '<div class="frame frame-ph rv">[кадр ' + (i + 1) + "]</div>";
+          ? '<figure class="frame rv" style="margin:0"><img src="' + frames[i] + '" alt="' + t("wp.frame") + " " + (i + 1) + " — " + esc(client) + '" width="800" height="450" loading="lazy"></figure>'
+          : '<div class="frame frame-ph rv">[' + t("wp.frame") + " " + (i + 1) + "]</div>";
       })
       .join("") +
     "</div>" +
-    '<section class="cta" aria-label="Заказать похожий ролик">' +
-    '<h2 class="h2 rv">Нужен похожий ролик?</h2>' +
+    '<section class="cta" aria-label="' + t("wp.similar") + '">' +
+    '<h2 class="h2 rv">' + t("wp.similar") + "</h2>" +
     '<div class="cta-actions rv">' +
-    '<a class="btn btn-white" href="' + tg + '" target="_blank" rel="noopener" data-tg="case">Написать в Telegram ↗</a>' +
-    '<button type="button" class="btn btn-line" data-form="' + (w.cat === "social" ? "Контент для соцсетей" : "Рекламный ролик") + '">Обсудить проект <span class="arr" aria-hidden="true">→</span></button>' +
+    '<a class="btn btn-white" href="' + tg + '" target="_blank" rel="noopener" data-tg="case">' + t("wp.tg") + "</a>" +
+    '<button type="button" class="btn btn-line" data-form="' + (w.cat === "social" ? "Контент для соцсетей" : "Рекламный ролик") + '">' + t("cta.full") + ' <span class="arr" aria-hidden="true">→</span></button>' +
     "</div></section>" +
     '<a class="next" href="work.html?w=' + next.slug + '">' +
     '<img src="' + (next.frame || next.poster) + '" alt="" width="1280" height="720" loading="lazy">' +
-    '<span class="next-cap"><span class="eyebrow">Следующая работа</span><strong>' + esc(next.client) + " ↗</strong>" +
-    '<span class="cap" style="display:block;margin-top:8px;font-size:12px">' + esc(next.kind) + " · " + next.dur + "</span></span></a>" +
+    '<span class="next-cap"><span class="eyebrow">' + t("wp.next") + "</span><strong>" + esc(tName(next.client)) + " ↗</strong>" +
+    '<span class="cap" style="display:block;margin-top:8px;font-size:12px">' + esc(tKind(next.kind)) + " · " + next.dur + "</span></span></a>" +
     "</article>";
 
   function step(n, t, p) {
@@ -134,7 +136,7 @@
     var id = w.videos[ep].id;
     player.innerHTML =
       '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0&modestbranding=1&playsinline=1&autoplay=1" ' +
-      'title="' + esc(w.client + " — " + w.kind) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+      'title="' + esc(client + " — " + kind) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
   }
 
   // Свой mp4 есть только для первого ролика проекта: assets/video/<slug>.mp4.
@@ -163,7 +165,7 @@
 
   function nativePlayer(v) {
     player.innerHTML = "";
-    v.setAttribute("aria-label", w.client + " — " + w.kind);
+    v.setAttribute("aria-label", client + " — " + kind);
     player.appendChild(v);
     var bar = document.createElement("div");
     bar.className = "vc";
@@ -233,7 +235,7 @@
   function posterUi() {
     var v = w.videos[ep];
     player.innerHTML =
-      '<button type="button" class="player-poster" aria-label="Смотреть ролик: ' + esc(w.client + (v.label ? ", " + v.label : "")) + '">' +
+      '<button type="button" class="player-poster" aria-label="' + t("wp.play") + ": " + esc(client + (v.label ? ", " + v.label : "")) + '">' +
       '<img src="assets/img/' + v.id + '.jpg" alt="' + esc(w.alt) + '" width="1280" height="720">' +
       '<span class="play-ico" aria-hidden="true"></span></button>';
     $(".player-poster", player).addEventListener("click", play);
