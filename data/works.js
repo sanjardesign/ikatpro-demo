@@ -101,12 +101,13 @@ window.WORKS = [
   {
     slug: "saxovat",
     client: "Saxovat",
-    kind: "Серия роликов, № 1–2",
+    kind: "Серия роликов, № 2–3",
     dur: "0:16",
     cat: "social",
+    // Номера как в названиях роликов на канале студии: «Saxovat № 2» и «Saxovat № 3».
     videos: [
-      { id: "RSguq3X2KqI", label: "№ 1", dur: "0:16" },
-      { id: "VjDtSwXtJs4", label: "№ 2", dur: "0:16" },
+      { id: "RSguq3X2KqI", label: "№ 2", dur: "0:16" },
+      { id: "VjDtSwXtJs4", label: "№ 3", dur: "0:16" },
     ],
     poster: "assets/img/RSguq3X2KqI.jpg",
     cover: "assets/covers/RSguq3X2KqI.jpg",
@@ -176,7 +177,7 @@ window.WORKS = [
 
   {
     slug: "hpc",
-    client: "HPC — ЖК в Коканде",
+    client: "HPC: ЖК в Коканде",
     kind: "Имиджевый ролик",
     dur: "2:40",
     cat: "corporate",

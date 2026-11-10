@@ -16,7 +16,7 @@
       "nav.contacts": "Контакты",
       "nav.label": "Основное меню",
       "lang.label": "Язык сайта",
-      "logo.label": "IKAT PRO — на главную",
+      "logo.label": "IKAT PRO, на главную",
       "cta.short": "Обсудить",
       "cta.ctx": " проект",
       "cta.full": "Обсудить проект",
@@ -41,11 +41,11 @@
       "dirs.label": "Направления",
       "dir1.eyebrow": "01 · Брендам",
       "dir1.title": "Реклама и имиджевые фильмы",
-      "dir1.text": "ТВ и digital-ролики, корпоративные фильмы, креативные концепции. Идея, съёмка, монтаж, цвет и звук — одна команда, своя студия.",
+      "dir1.text": "ТВ и digital-ролики, корпоративные фильмы, креативные концепции. Идею, съёмку, монтаж, цвет и звук делает одна команда на своей студии.",
       "dir1.btn": "Обсудить ролик",
       "dir2.eyebrow": "02 · Соцсетям",
       "dir2.title": "Контент и продвижение",
-      "dir2.text": "Reels и серии роликов, интеграции в шоу и подкасты, ведение соцсетей. Каждый месяц — отчёт: просмотры, переходы, заявки.",
+      "dir2.text": "Reels и серии роликов, интеграции в шоу и подкасты, ведение соцсетей. Каждый месяц присылаем отчёт: просмотры, переходы, заявки.",
       "dir2.btn": "Обсудить контент",
       "contacts.title": "Кому написать",
       "c.ads": "Реклама и фильмы",
@@ -62,7 +62,7 @@
       "toast.lang": "Язык: русский",
       // Форма
       "form.title": "Обсудить проект",
-      "form.lead": "Три поля — и продюсер ответит в течение рабочего дня.",
+      "form.lead": "Заполните три поля. Продюсер ответит в течение рабочего дня.",
       "form.kind": "Тип проекта",
       "kind.0": "Рекламный ролик",
       "kind.1": "Имиджевый или корпоративный фильм",
@@ -118,7 +118,7 @@
       "wp.all": "Все работы",
       // Команда
       "team.title": "Команда · 10 человек",
-      "team.note": "Фон — кадр из работы студии.",
+      "team.note": "Фон: кадр из работы студии.",
       // О нас
       "about.eyebrow": "О нас · с 2018 года",
       "about.title": "Видеопродакшн полного цикла в Ташкенте",
@@ -153,10 +153,30 @@
       "wp.backTo": "К работам",
       "wp.format": "Формат",
       "wp.cat": "Категория",
-      "title.home": "IKAT PRO — видеопродакшн полного цикла в Ташкенте",
-      "title.team": "Команда — IKAT PRO",
-      "title.about": "О нас и контакты — IKAT PRO",
+      "title.home": "IKAT PRO: видеопродакшн полного цикла в Ташкенте",
+      "title.team": "Команда · IKAT PRO",
+      "title.about": "О нас и контакты · IKAT PRO",
       "about.certLabel": "Свидетельство CPR-2026-000114",
+      "letters.title": "Нас рекомендуют",
+      "letters.lead": "12 рекомендательных писем от клиентов. Нажмите на письмо, чтобы прочитать его целиком.",
+      "letters.more": "Показать все письма",
+      "letters.open": "Открыть письмо",
+      "letters.tr": "перевод с узбекского",
+      "dir3.eyebrow": "03 · Аренда",
+      "dir3.title": "Аренда студии",
+      "dir3.text": "Своя студия в Ташкенте на ул. Восита Вохидова, 92. Снимайте у нас свои проекты: Пн–Сб, 10:00–19:00. Условия и свободные даты подскажет администратор.",
+      "err.kind": "Выберите тип проекта",
+      "form.leadStudio": "Заполните три поля. Администратор студии ответит в течение рабочего дня.",
+      "form.call": "или позвоните",
+      "wp.works": "Работы",
+      "wp.about": "IKAT PRO: видеопродакшн полного цикла, Ташкент",
+      "wp.hint": "Откроется короткая заявка: три поля",
+      "c.tga.ads": "Telegram студии: реклама и фильмы",
+      "c.tga.studio": "Telegram студии: аренда",
+      "c.tga.smm": "Telegram студии: соцсети и SMM",
+      "desc.home": "IKAT PRO: реклама, имиджевые фильмы и контент для соцсетей. Своя студия в Ташкенте, с 2018 года. Komatsu, Asakabank, Indorama, Mannol и другие.",
+      "desc.team": "Команда видеопродакшна IKAT PRO: режиссёры, продюсеры, монтажёры и дизайнер. 10 человек, своя студия в Ташкенте.",
+      "desc.about": "IKAT PRO: видеопродакшн полного цикла в Ташкенте с 2018 года. Своя студия на ул. Восита Вохидова, 92. Резидент Uzbekistan Creative Park.",
     },
     uz: {
       "hero.pause": "Almaşişni töxtatiş",
@@ -168,7 +188,7 @@
       "nav.contacts": "Kontaktlar",
       "nav.label": "Asosiy menyu",
       "lang.label": "Sayt tili",
-      "logo.label": "IKAT PRO — boş sahifa",
+      "logo.label": "IKAT PRO, boş sahifa",
       "cta.short": "Gaplaşamiz",
       "cta.ctx": "",
       "cta.full": "Loyiha haqida gaplaşamiz",
@@ -193,7 +213,7 @@
       "dirs.label": "Yönalişlar",
       "dir1.eyebrow": "01 · Brendlarga",
       "dir1.title": "Reklama va imij filmlar",
-      "dir1.text": "TV va digital roliklar, korporativ filmlar, kreativ ğoyalar. Ğoya, suratga oliş, montaj, rang va ovoz — bitta jamoa, öz studiyamiz.",
+      "dir1.text": "TV va digital roliklar, korporativ filmlar, kreativ ğoyalar. Ğoya, suratga oliş, montaj, rang va ovozni bitta jamoa öz studiyasida qiladi.",
       "dir1.btn": "Rolik haqida gaplaşamiz",
       "dir2.eyebrow": "02 · Ijtimoiy tarmoqlarga",
       "dir2.title": "Kontent va tarğibot",
@@ -213,7 +233,7 @@
       "dock.label": "Menyu",
       "toast.lang": "Til: özbekça",
       "form.title": "Loyiha haqida gaplaşamiz",
-      "form.lead": "Uçta maydonni töldiring — prodyuser iş kuni davomida javob beradi.",
+      "form.lead": "Uçta maydonni töldiring. Prodyuser iş kuni davomida javob beradi.",
       "form.kind": "Loyiha turi",
       "kind.0": "Reklama roliki",
       "kind.1": "Imij yoki korporativ film",
@@ -267,7 +287,7 @@
       "wp.404": "Bunday iş yöq",
       "wp.all": "Barça işlar",
       "team.title": "Jamoa · 10 kişi",
-      "team.note": "Fon — studiya işidan kadr.",
+      "team.note": "Fon: studiya işidan kadr.",
       "about.eyebrow": "Biz haqimizda · 2018-yildan",
       "about.title": "Toşkentdagi töliq siklli videoprodakşn",
       "about.text": "IKAT PRO reklama, imij filmlar va ijtimoiy tarmoqlar uçun kontent suratga oladi. Asosan brendlar bilan işlaymiz: Komatsu, Asakabank, Indorama, Mannol, AION va boşqalar. Ğoya, ssenariy, suratga oliş, montaj, rang va ovozni bitta jamoa öz studiyasida qiladi.",
@@ -301,10 +321,30 @@
       "wp.backTo": "Işlarga",
       "wp.format": "Format",
       "wp.cat": "Turkum",
-      "title.home": "IKAT PRO — Toşkentdagi töliq siklli videoprodakşn",
-      "title.team": "Jamoa — IKAT PRO",
-      "title.about": "Biz haqimizda va kontaktlar — IKAT PRO",
+      "title.home": "IKAT PRO: Toşkentdagi töliq siklli videoprodakşn",
+      "title.team": "Jamoa · IKAT PRO",
+      "title.about": "Biz haqimizda va kontaktlar · IKAT PRO",
       "about.certLabel": "CPR-2026-000114 guvohnomasi",
+      "letters.title": "Bizni tavsiya qilişadi",
+      "letters.lead": "Mijozlardan 12 ta tavsiya xati. Töliq öqiş uçun xatni bosing.",
+      "letters.more": "Barça xatlarni körsatiş",
+      "letters.open": "Xatni oçiş",
+      "letters.tr": "",
+      "dir3.eyebrow": "03 · Ijara",
+      "dir3.title": "Studiya ijarasi",
+      "dir3.text": "Toşkentdagi öz studiyamiz: Vosit Vohidov köçasi, 92. Loyihalaringizni bizda suratga oling: duşanba–şanba, 10:00–19:00. Şartlar va böş kunlarni administrator aytadi.",
+      "err.kind": "Loyiha turini tanlang",
+      "form.leadStudio": "Uçta maydonni töldiring. Studiya administratori iş kuni davomida javob beradi.",
+      "form.call": "yoki qönğiroq qiling",
+      "wp.works": "Işlar",
+      "wp.about": "IKAT PRO: töliq siklli videoprodakşn, Toşkent",
+      "wp.hint": "Qisqa ariza oçiladi: uçta maydon",
+      "c.tga.ads": "Studiya Telegrami: reklama va filmlar",
+      "c.tga.studio": "Studiya Telegrami: ijara",
+      "c.tga.smm": "Studiya Telegrami: ijtimoiy tarmoqlar va SMM",
+      "desc.home": "IKAT PRO: reklama, imij filmlar va ijtimoiy tarmoqlar uçun kontent. Toşkentdagi öz studiyamiz, 2018-yildan. Komatsu, Asakabank, Indorama, Mannol va boşqalar.",
+      "desc.team": "IKAT PRO videoprodakşn jamoasi: rejissyorlar, prodyuserlar, montajçilar va dizayner. 10 kişi, Toşkentdagi öz studiyamiz.",
+      "desc.about": "IKAT PRO: 2018-yildan Toşkentdagi töliq siklli videoprodakşn. Vosit Vohidov köçasi, 92 dagi öz studiyamiz. Uzbekistan Creative Park rezidenti.",
     },
     en: {
       "hero.pause": "Pause the slideshow",
@@ -313,13 +353,13 @@
       skip: "Skip to content",
       "nav.work": "Work",
       "nav.team": "Team",
-      "nav.contacts": "Contacts",
+      "nav.contacts": "Contact",
       "nav.label": "Main menu",
       "lang.label": "Site language",
-      "logo.label": "IKAT PRO — home",
-      "cta.short": "Discuss",
+      "logo.label": "IKAT PRO, home",
+      "cta.short": "Start",
       "cta.ctx": " a project",
-      "cta.full": "Discuss a project",
+      "cta.full": "Start a project",
       badge: "Uzbekistan Creative Park resident · 2026",
       head1: "Videos people\nwatch to the end",
       head2: "Ads and films\nfor Uzbekistan’s brands",
@@ -342,25 +382,25 @@
       "dir1.eyebrow": "01 · For brands",
       "dir1.title": "Ads and brand films",
       "dir1.text": "TV and digital ads, corporate films, creative concepts. Idea, shoot, edit, colour and sound: one team and our own studio.",
-      "dir1.btn": "Discuss an ad",
+      "dir1.btn": "Talk about an ad",
       "dir2.eyebrow": "02 · For social",
       "dir2.title": "Content and promotion",
       "dir2.text": "Reels and video series, brand integrations in shows and podcasts, social media management. A report every month: views, clicks, leads.",
-      "dir2.btn": "Discuss content",
+      "dir2.btn": "Talk about content",
       "contacts.title": "Who to contact",
       "c.ads": "Ads and films",
       "c.studio": "Studio rental",
-      "c.smm": "Social and SMM",
+      "c.smm": "Social media",
       "c.address": "92 Vosit Vohidov St, Tashkent · Mon–Sat 10:00–19:00",
       "c.jobs": "Careers",
       "c.mail": "Email",
       "c.phone": "Phone",
       "ftr.eyebrow": "Three fields, a reply within one business day",
-      "ftr.big": "Discuss<br>a project →",
+      "ftr.big": "Start<br>a project →",
       "ftr.copy": "© 2018–2026 IKAT PRO · Tashkent",
       "dock.label": "Menu",
       "toast.lang": "Language: English",
-      "form.title": "Discuss a project",
+      "form.title": "Start a project",
       "form.lead": "Fill in three fields and a producer will reply within one business day.",
       "form.kind": "Project type",
       "kind.0": "Commercial",
@@ -435,24 +475,44 @@
       "form.thanksTo": "We will reply to",
       "who.prod": "A producer will reply within one business day.",
       "who.studio": "The studio manager will reply within one business day.",
-      "c.btn.ads": "Discuss an ad",
+      "c.btn.ads": "Talk about an ad",
       "c.btn.studio": "Book the studio",
-      "c.btn.smm": "Discuss content",
+      "c.btn.smm": "Talk about content",
       "c.tg": "Studio Telegram ↗",
       "c.where": "Studio",
       "c.map": "Open the map ↗",
       "ftr.tg": "New work and behind-the-scenes on Telegram ↗",
-      "wp.want": "I want a film like this",
-      "wp.task": "I want a film like",
+      "wp.want": "Make one like this for us",
+      "wp.task": "We would like a film similar to",
       "wp.video": "Film",
       "wp.home": "IKAT PRO, home",
       "wp.backTo": "Back to work",
       "wp.format": "Format",
       "wp.cat": "Category",
-      "title.home": "IKAT PRO — full-cycle video production in Tashkent",
-      "title.team": "Team — IKAT PRO",
-      "title.about": "About and contacts — IKAT PRO",
+      "title.home": "IKAT PRO: full-cycle video production in Tashkent",
+      "title.team": "Team · IKAT PRO",
+      "title.about": "About and contacts · IKAT PRO",
       "about.certLabel": "Certificate CPR-2026-000114",
+      "letters.title": "Clients recommend us",
+      "letters.lead": "12 reference letters from clients. Select a letter to read it in full.",
+      "letters.more": "Show all letters",
+      "letters.open": "Open the letter",
+      "letters.tr": "translated from Uzbek",
+      "dir3.eyebrow": "03 · Rental",
+      "dir3.title": "Studio rental",
+      "dir3.text": "Our own studio in Tashkent at 92 Vosit Vohidov St. Shoot your projects here Mon–Sat, 10:00–19:00. The studio manager will share terms and free dates.",
+      "err.kind": "Choose a project type",
+      "form.leadStudio": "Fill in three fields and the studio manager will reply within one business day.",
+      "form.call": "or call",
+      "wp.works": "Work",
+      "wp.about": "IKAT PRO: full-cycle video production, Tashkent",
+      "wp.hint": "Opens a short form: three fields",
+      "c.tga.ads": "Studio Telegram: ads and films",
+      "c.tga.studio": "Studio Telegram: rental",
+      "c.tga.smm": "Studio Telegram: social media",
+      "desc.home": "IKAT PRO makes commercials, brand films and social media content. Our own studio in Tashkent, since 2018. Komatsu, Asakabank, Indorama, Mannol and others.",
+      "desc.team": "The IKAT PRO video production team: directors, producers, editors and a designer. 10 people and our own studio in Tashkent.",
+      "desc.about": "IKAT PRO is a full-cycle video production company in Tashkent, working since 2018. Our own studio at 92 Vosit Vohidov St. Uzbekistan Creative Park resident.",
     },
   };
 
@@ -466,14 +526,14 @@
     "Бэкстейдж": ["Sahna ortida", "Behind the scenes"],
     "Серия роликов": ["Roliklar seriyasi", "Video series"],
     "Серия роликов, № 1–3": ["Roliklar seriyasi, № 1–3", "Video series, No. 1–3"],
-    "Серия роликов, № 1–2": ["Roliklar seriyasi, № 1–2", "Video series, No. 1–2"],
+    "Серия роликов, № 2–3": ["Roliklar seriyasi, № 2–3", "Video series, No. 2–3"],
     "Ролик": ["Rolik", "Film"],
     "Имиджевый ролик": ["Imij roliki", "Brand film"],
   };
   var NAMES = {
     "Шоурил": ["Şouril", "Showreel"],
     "Анкалайф": ["Ankalayf", "Ankalife"],
-    "HPC — ЖК в Коканде": ["HPC — Qöqondagi turar-joy majmuasi", "HPC — Kokand residential complex"],
+    "HPC: ЖК в Коканде": ["HPC: Qöqondagi turar-joy majmuasi", "HPC: Kokand residential complex"],
   };
   var CATS = {
     ads: ["Реклама", "Reklama", "Ads"],
@@ -491,13 +551,22 @@
 
   window.LANG = lang;
   window.t = function (key) {
-    return (D[lang] && D[lang][key]) || D.ru[key] || key;
+    // Пустая строка в переводе — тоже перевод (например, у короткой кнопки нет второго слова).
+    if (D[lang] && Object.prototype.hasOwnProperty.call(D[lang], key)) return D[lang][key];
+    return D.ru[key] || key;
   };
   window.tKind = function (s) {
     return col >= 0 && KINDS[s] ? KINDS[s][col] : s;
   };
   window.tName = function (s) {
     return col >= 0 && NAMES[s] ? NAMES[s][col] : s;
+  };
+  window.tLabel = function (s) {
+    return lang === "en" ? String(s).replace("№", "No.") : s;
+  };
+  // Локализованное значение из объекта {ru, uz, en} или обычная строка.
+  window.tObj = function (v) {
+    return v && typeof v === "object" ? v[lang] || v.ru : v;
   };
   window.tCat = function (c) {
     return CATS[c] ? CATS[c][col + 1] : c;
@@ -509,6 +578,9 @@
     // Заголовок вкладки: <body data-title="title.home">
     var tk = document.body.getAttribute("data-title");
     if (tk) document.title = window.t(tk);
+    var dk = document.body.getAttribute("data-desc");
+    var md = document.querySelector('meta[name="description"]');
+    if (dk && md) md.setAttribute("content", window.t(dk));
     // Имена людей: латиница для UZ и EN лежит в data-uz / data-en.
     Array.prototype.forEach.call((root || document).querySelectorAll("[data-" + lang + "]"), function (el) {
       el.textContent = el.getAttribute("data-" + lang);

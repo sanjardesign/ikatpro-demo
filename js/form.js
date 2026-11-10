@@ -7,7 +7,8 @@
 (function () {
   // Значения типов остаются русскими (они уходят в заявку), подписи на кнопках переводятся.
   var KINDS = ["Рекламный ролик", "Имиджевый фильм", "Контент для соцсетей", "Аренда студии", "Другое"];
-  var kind = KINDS[0];
+  // Тип не выбран, пока его не задала кнопка или сам человек: так не уйдёт заявка с чужим типом.
+  var kind = "";
   var opener = null;
 
   var modal = document.createElement("div");
@@ -22,10 +23,11 @@
     '<h2 class="form-title" id="form-title">' + t("form.title") + "</h2>" +
     '<p class="form-lead">' + t("form.lead") + "</p>" +
     "</div>" +
-    '<fieldset class="kinds"><legend class="sr-only">' + t("form.kind") + "</legend>" +
+    '<fieldset class="kinds"><legend class="kinds-legend">' + t("form.kind") + "</legend>" +
     KINDS.map(function (k, i) {
       return '<button type="button" class="chip" aria-pressed="false" data-kind="' + k + '">' + t("kind." + i) + "</button>";
     }).join("") +
+    '<span class="field-err kinds-err" aria-live="polite"></span>' +
     "</fieldset>" +
     field("name", t("form.name"), "text", "organization") +
     field("contact", t("form.contact"), "text", "tel") +
@@ -40,6 +42,7 @@
     '<h2 class="form-title">' + t("form.thanks") + "</h2>" +
     '<p class="thanks-who"></p>' +
     '<p class="thanks-to"></p>' +
+    '<p class="thanks-call">' + t("form.call") + ': <a href="tel:+998773779911" data-tg="form">+998 77 377 99 11</a></p>' +
     '<button type="button" class="btn btn-line" data-close>' + t("close") + "</button>" +
     "</div>" +
     "</div>" +
@@ -61,10 +64,13 @@
   var msgs = { name: t("err.name"), contact: t("err.contact"), task: t("err.task") };
 
   function setKind(k) {
-    kind = KINDS.indexOf(k) >= 0 ? k : kind;
+    kind = KINDS.indexOf(k) >= 0 ? k : "";
     chips.forEach(function (c) {
       c.setAttribute("aria-pressed", String(c.dataset.kind === kind));
     });
+    if (kind) modal.querySelector(".kinds-err").textContent = "";
+    // Для аренды отвечает администратор студии, для остального — продюсер.
+    modal.querySelector(".form-lead").textContent = t(kind === "Аренда студии" ? "form.leadStudio" : "form.lead");
   }
 
   function focusables() {
@@ -75,6 +81,7 @@
 
   function open(k, from) {
     opener = from || document.activeElement;
+    // Кнопка с типом подставляет его; общая кнопка оставляет прошлый выбор или пустой тип.
     if (k) setKind(k);
     // После «Спасибо» форма снова чистая.
     if (!thanks.hidden) reset();
@@ -86,7 +93,7 @@
     // Страница под окном замирает: карусель встаёт на паузу, плеер останавливается.
     document.dispatchEvent(new CustomEvent("ikat:form", { detail: { open: true } }));
     setTimeout(function () {
-      var first = modal.querySelector('.chip[aria-pressed="true"]') || focusables()[0];
+      var first = modal.querySelector('.chip[aria-pressed="true"]') || chips[0];
       if (first) first.focus();
     }, 50);
     window.track("lead_form_open", { type: kind, page: location.pathname });
@@ -131,6 +138,11 @@
 
   function validate() {
     var ok = true;
+    if (!kind) {
+      modal.querySelector(".kinds-err").textContent = t("err.kind");
+      chips[0].focus();
+      ok = false;
+    }
     form.querySelectorAll(".field").forEach(function (f) {
       var bad = isBad(f);
       setErr(f, bad);
@@ -146,6 +158,12 @@
   form.addEventListener("input", function (e) {
     var f = e.target.closest(".field");
     if (f && f.classList.contains("err") && !isBad(f)) setErr(f, false);
+  });
+
+  // Заполненное с ошибкой поле подсказывает сразу, как только из него вышли.
+  form.addEventListener("focusout", function (e) {
+    var f = e.target.closest && e.target.closest(".field");
+    if (f && f.querySelector("input").value.trim() && isBad(f)) setErr(f, true);
   });
 
   chips.forEach(function (c) {
@@ -175,7 +193,8 @@
 
     // Кто ответит и куда: человек видит, что заявка дошла.
     thanks.querySelector(".thanks-who").textContent = t(kind === "Аренда студии" ? "who.studio" : "who.prod");
-    thanks.querySelector(".thanks-to").textContent = t("form.thanksTo") + ": " + lead.contact;
+    thanks.querySelector(".thanks-to").textContent =
+      t("kind." + KINDS.indexOf(kind)) + " · " + t("form.thanksTo") + ": " + lead.contact;
 
     // Кнопка показывает, что заявка уходит, и не даёт нажать дважды.
     var send = form.querySelector('button[type="submit"]');

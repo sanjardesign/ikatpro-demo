@@ -79,7 +79,7 @@
 
   // Описание кадра для экранных дикторов: по-русски своё, на других языках — клиент и формат.
   function altOf(w) {
-    return window.LANG === "ru" ? w.alt : tName(w.client) + " — " + tKind(w.kind);
+    return window.LANG === "ru" ? w.alt : tName(w.client) + ", " + tKind(w.kind);
   }
 
   // ——— Шапка: закреплена, после прокрутки получает подложку ———
@@ -379,7 +379,13 @@
     function render() {
       var list;
       if (filter === "all") {
-        list = expanded ? window.WORKS : window.FEATURED.map(window.workBySlug);
+        // Первые шесть работ остаются на местах: остальные дописываются в конец, плитки не прыгают под пальцем.
+        var top = window.FEATURED.map(window.workBySlug);
+        list = expanded
+          ? top.concat(window.WORKS.filter(function (w) {
+              return top.indexOf(w) < 0;
+            }))
+          : top;
       } else {
         list = window.WORKS.filter(function (w) {
           return w.cat === filter;
@@ -462,6 +468,113 @@
     }
 
     render();
+  }
+
+  // ——— Рекомендательные письма ———
+  var lettersBox = $(".letters-grid");
+  if (lettersBox && window.LETTERS) initLetters();
+
+  function initLetters() {
+    var all = false;
+    var moreBtn = $(".letters-more button");
+
+    function card(l, i) {
+      var company = tObj(l.company);
+      var role = tObj(l.role);
+      var who = tObj(l.person) + (role ? ", " + role.charAt(0).toLowerCase() + role.slice(1) : "");
+      var note = l.translated && l.translated !== "uz" && window.LANG !== "uz" && t("letters.tr") ? " (" + t("letters.tr") + ")" : "";
+      return (
+        '<button type="button" class="letter rv" data-i="' + i + '" aria-label="' + t("letters.open") + ": " + esc(company) + '">' +
+        '<span class="letter-doc"><img src="assets/letters/' + l.slug + '-s.jpg" alt="" width="254" height="360" loading="lazy" decoding="async"></span>' +
+        '<span class="letter-txt"><strong class="letter-co">' + esc(company) + "</strong>" +
+        '<span class="letter-q">«' + esc(tObj(l.quote)) + "»" + esc(note) + "</span>" +
+        '<span class="letter-who">' + esc(who) + "</span></span></button>"
+      );
+    }
+
+    function render() {
+      var list = all ? window.LETTERS : window.LETTERS.slice(0, 6);
+      lettersBox.innerHTML = list.map(card).join("");
+      $(".letters-more").hidden = all;
+      reveal(lettersBox);
+    }
+
+    moreBtn.addEventListener("click", function () {
+      all = true;
+      render();
+      var seventh = $$(".letter", lettersBox)[6];
+      if (seventh) seventh.focus();
+    });
+
+    // Письмо целиком — в окне поверх страницы. Esc и клик по фону закрывают, фокус возвращается на карточку.
+    var box = document.createElement("div");
+    box.className = "lbox";
+    box.setAttribute("aria-hidden", "true");
+    box.innerHTML =
+      '<div class="lbox-in" role="dialog" aria-modal="true" aria-label="' + t("letters.title") + '">' +
+      '<button type="button" class="modal-x lbox-x" aria-label="' + t("close") + '">×</button>' +
+      '<div class="lbox-scroll"><img alt="" width="1191" height="1684"></div></div>';
+    document.body.appendChild(box);
+    var bigImg = $("img", box);
+    var from = null;
+
+    function openLetter(i, el) {
+      var l = window.LETTERS[i];
+      from = el;
+      bigImg.src = "assets/letters/" + l.slug + ".jpg";
+      bigImg.alt = tObj(l.company) + ": " + t("letters.title").toLowerCase();
+      box.classList.add("open");
+      box.setAttribute("aria-hidden", "false");
+      document.documentElement.style.overflow = "hidden";
+      $(".lbox-scroll", box).scrollTop = 0;
+      $(".lbox-x", box).focus();
+      window.track("letter_open", { company: tObj(l.company) });
+    }
+    function closeLetter() {
+      box.classList.remove("open");
+      box.setAttribute("aria-hidden", "true");
+      document.documentElement.style.overflow = "";
+      if (from) from.focus();
+    }
+    lettersBox.addEventListener("click", function (e) {
+      var b = e.target.closest(".letter");
+      if (b) openLetter(+b.getAttribute("data-i"), b);
+    });
+    $(".lbox-x", box).addEventListener("click", closeLetter);
+    box.addEventListener("click", function (e) {
+      if (e.target === box) closeLetter();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!box.classList.contains("open")) return;
+      if (e.key === "Escape") closeLetter();
+      // В окне одна кнопка: Tab остаётся на ней.
+      if (e.key === "Tab") {
+        e.preventDefault();
+        $(".lbox-x", box).focus();
+      }
+    });
+
+    render();
+  }
+
+  // ——— Нижнее меню на телефоне и планшете: прячется при прокрутке вниз, чтобы не закрывать текст ———
+  var dock = $(".dock");
+  if (dock) {
+    var lastY = window.scrollY;
+    window.addEventListener(
+      "scroll",
+      function () {
+        var y = window.scrollY;
+        var nearEnd = y + window.innerHeight > document.documentElement.scrollHeight - 80;
+        if (Math.abs(y - lastY) < 12) return;
+        dock.classList.toggle("away", y > lastY && y > 200 && !nearEnd);
+        lastY = y;
+      },
+      { passive: true }
+    );
+    dock.addEventListener("focusin", function () {
+      dock.classList.remove("away");
+    });
   }
 
   // ——— Команда ———

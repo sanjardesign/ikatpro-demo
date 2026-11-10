@@ -19,7 +19,7 @@
   }
 
   if (!w) {
-    document.title = t("wp.404") + " — IKAT PRO";
+    document.title = t("wp.404") + " · IKAT PRO";
     $(".wp-info").hidden = true;
     body.innerHTML =
       '<section class="notfound"><span class="eyebrow">404</span><h1 class="case-title">' + t("wp.404") + "</h1>" +
@@ -29,11 +29,12 @@
 
   var client = tName(w.client);
   var kind = tKind(w.kind);
-  document.title = client + " — " + kind + " — IKAT PRO";
+  document.title = client + ", " + kind.toLowerCase() + " · IKAT PRO";
   var meta = document.querySelector('meta[name="description"]');
   if (meta) meta.setAttribute("content", client + ": " + kind.toLowerCase() + ", " + w.dur + ". IKAT PRO.");
-  $(".wp-name").textContent = client;
-  $(".wp-kind").textContent = "· " + kind;
+  // Стрелка «назад» подписана «Работы», а не названием текущей работы.
+  $(".wp-name").textContent = t("wp.works");
+  $(".wp-kind").textContent = "";
 
   // Тип заявки и подсказка задачи для всех кнопок «Обсудить» на этой странице.
   var formKind = w.cat === "social" ? "Контент для соцсетей" : w.cat === "corporate" ? "Имиджевый фильм" : "Рекламный ролик";
@@ -62,6 +63,11 @@
     .join("");
   var infoBtn = $(".wp-info");
   var panel = $("#credits");
+  // Без имён съёмочной группы панель повторяла бы строку под названием — прячем значок.
+  if (credits.length <= 4) {
+    infoBtn.hidden = true;
+    panel.hidden = true;
+  }
   infoBtn.addEventListener("click", function () {
     var open = !panel.classList.contains("open");
     panel.classList.toggle("open", open);
@@ -89,7 +95,7 @@
 
   var frames = w.frames || [];
   var tg = "https://t.me/Ikat_pro_ad?start=" + encodeURIComponent(w.slug.replace(/-/g, "_"));
-  var alt = window.LANG === "ru" ? w.alt : client + " — " + kind;
+  var alt = window.LANG === "ru" ? w.alt : client + ", " + kind;
 
   body.innerHTML =
     '<section aria-label="' + t("wp.video") + '">' +
@@ -102,25 +108,27 @@
       ? '<div class="episodes" role="group" aria-label="' + t("wp.episodes") + '">' +
         w.videos
           .map(function (v, i) {
-            return '<button type="button" class="chip" aria-pressed="' + (i === ep) + '" data-ep="' + i + '">' + esc(v.lang ? t("ver." + v.lang) : v.label || t("wp.clip") + " " + (i + 1)) + " · " + v.dur + "</button>";
+            return '<button type="button" class="chip" aria-pressed="' + (i === ep) + '" data-ep="' + i + '">' + esc(v.lang ? t("ver." + v.lang) : tLabel(v.label || t("wp.clip") + " " + (i + 1))) + " · " + v.dur + "</button>";
           })
           .join("") +
         "</div>"
       : "") +
     // Заявка — сразу под роликом: человек досмотрел и готов написать.
     '<div class="wp-under">' +
-    '<div class="wp-title"><h1>' + esc(client) + '</h1><span class="cap">' + esc(kind) + " · " + w.dur + "</span></div>" +
+    '<div class="wp-title"><h1>' + esc(client) + '</h1><span class="cap">' + esc(kind) + " · " + w.dur + "</span>" +
+    '<span class="wp-about">' + t("wp.about") + "</span></div>" +
     '<div class="wp-actions">' +
     '<button type="button" class="btn btn-white" data-form="' + formKind + '" data-task="' + esc(formTask) + '">' + t("wp.want") + ' <span class="arr" aria-hidden="true">→</span></button>' +
     '<a class="btn btn-line" href="' + tg + '" target="_blank" rel="noopener" data-tg="case">' + t("wp.tg") + "</a>" +
     '<a class="yt-link" href="https://www.youtube.com/watch?v=' + w.videos[ep].id + '" target="_blank" rel="noopener">' + t("wp.youtube") + "</a>" +
+    '<span class="wp-hint">' + t("wp.hint") + "</span>" +
     "</div></div>" +
     "</section>" +
     (frames.length
       ? '<div class="frames" data-stagger>' +
         frames
           .map(function (f, i) {
-            return '<figure class="frame rv" style="margin:0"><img src="' + f + '" alt="' + t("wp.frame") + " " + (i + 1) + " — " + esc(client) + '" width="800" height="450" loading="lazy"></figure>';
+            return '<figure class="frame rv" style="margin:0"><img src="' + f + '" alt="' + t("wp.frame") + " " + (i + 1) + ", " + esc(client) + '" width="800" height="450" loading="lazy"></figure>';
           })
           .join("") +
         "</div>"
@@ -157,7 +165,7 @@
     var id = w.videos[ep].id;
     player.innerHTML =
       '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0&modestbranding=1&playsinline=1&autoplay=1" ' +
-      'title="' + esc(client + " — " + kind) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+      'title="' + esc(client + ", " + kind) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
   }
 
   // Свой mp4: assets/video/<slug>.mp4 для первого ролика, <slug>-ru.mp4 / <slug>-uz.mp4 для языковых версий.
@@ -187,7 +195,7 @@
 
   function nativePlayer(v) {
     player.innerHTML = "";
-    v.setAttribute("aria-label", client + " — " + kind);
+    v.setAttribute("aria-label", client + ", " + kind);
     player.appendChild(v);
     var bar = document.createElement("div");
     bar.className = "vc";

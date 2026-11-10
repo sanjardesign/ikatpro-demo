@@ -3019,3 +3019,406 @@ button.ftr-big {
     padding: 0 5px;
   }
 }
+
+/* ═══════════ Правки после повторного теста ═══════════ */
+
+/* ——— Три услуги в ряд ——— */
+
+.dirs {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dir .h2 {
+  font-size: clamp(28px, 2.6vw, 44px);
+}
+
+@media (max-width: 1100px) {
+  .dirs {
+    grid-template-columns: 1fr;
+  }
+
+  .dir + .dir {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+
+/* ——— Рекомендательные письма ——— */
+
+.letters {
+  padding: 96px var(--pad) 40px;
+  border-top: 1px solid var(--line);
+}
+
+.letters-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px 40px;
+  margin-bottom: 40px;
+}
+
+.letters-head p {
+  max-width: 420px;
+  margin: 0;
+  color: var(--muted-2);
+}
+
+.letters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line-3);
+}
+
+.letter {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding: 26px 26px 26px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line-3);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.3s;
+}
+
+.letter:nth-child(3n + 2),
+.letter:nth-child(3n + 3) {
+  padding-left: 26px;
+  border-left: 1px solid var(--line-3);
+}
+
+.letter:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Скан письма — маленький лист бумаги: видно, что это настоящий документ. */
+.letter-doc {
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s var(--ease);
+}
+
+.letter-doc img {
+  width: 100%;
+  height: auto;
+}
+
+.letter:hover .letter-doc {
+  transform: translateY(-4px) rotate(-1.5deg);
+}
+
+.letter-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.letter-co {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.letter-q {
+  color: #e2e2e2;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.letter-who {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.letters-more {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Письмо целиком */
+.lbox {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pad);
+  background: rgba(0, 0, 0, 0.82);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0s linear 0.3s;
+}
+
+.lbox.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s, visibility 0s;
+}
+
+.lbox-in {
+  position: relative;
+  display: flex;
+  width: min(100%, 860px);
+  max-height: calc(100dvh - var(--pad) * 2);
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  transform: scale(0.96);
+  transition: transform 0.35s var(--ease);
+}
+
+.lbox.open .lbox-in {
+  transform: none;
+}
+
+.lbox-scroll {
+  width: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.lbox-scroll img {
+  width: 100%;
+  height: auto;
+}
+
+.lbox-x {
+  top: 10px;
+  right: 10px;
+  background: #000;
+  color: #fff;
+}
+
+.lbox-x:hover {
+  background: #2b2a29;
+}
+
+@media (max-width: 1100px) {
+  .letters-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .letter:nth-child(3n + 2),
+  .letter:nth-child(3n + 3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .letter:nth-child(2n) {
+    padding-left: 26px;
+    border-left: 1px solid var(--line-3);
+  }
+}
+
+@media (max-width: 760px) {
+  .letters {
+    padding-top: 72px;
+  }
+
+  .letters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .letter,
+  .letter:nth-child(2n) {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 16px;
+    padding: 22px 0;
+    border-left: 0;
+  }
+
+  .lbox {
+    padding: 0;
+  }
+
+  .lbox-in {
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+/* ——— Форма: тип обязателен, телефон в «Спасибо», низкие экраны ——— */
+
+.kinds-err {
+  flex-basis: 100%;
+}
+
+.thanks-call a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inp:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+/* «Отправить» всегда на виду: кнопки прилипают к низу окна, если форма не помещается. */
+.form-actions {
+  position: sticky;
+  bottom: -36px;
+  z-index: 1;
+  margin: 0 -36px -36px;
+  padding: 14px 36px 36px;
+  background: linear-gradient(to top, #0e0e0e 78%, rgba(14, 14, 14, 0));
+}
+
+@media (max-width: 760px) {
+  .form-actions {
+    bottom: calc(-28px - env(safe-area-inset-bottom));
+    margin: 0 calc(var(--pad) * -1) calc(-28px - env(safe-area-inset-bottom));
+    padding: 14px var(--pad) calc(28px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-height: 640px) {
+  .modal-scroll {
+    padding: 22px 28px;
+  }
+
+  .form {
+    gap: 12px;
+  }
+
+  .form-title {
+    font-size: 22px;
+  }
+
+  .form-lead {
+    margin-top: 4px;
+    font-size: 13px;
+  }
+
+  .kinds .chip {
+    min-height: 36px;
+    padding: 0 12px;
+  }
+
+  .inp {
+    height: 40px;
+  }
+
+  .form-actions {
+    bottom: -22px;
+    margin: 0 -28px -22px;
+    padding: 10px 28px 22px;
+  }
+
+  .form-actions .btn {
+    min-height: 44px;
+  }
+}
+
+/* ——— Рамка фокуса на плитках работ: поверх кадра ——— */
+
+.tile:focus-visible,
+.next:focus-visible {
+  outline: none;
+}
+
+.tile:focus-visible::before {
+  height: 100%;
+  background: none;
+  box-shadow: inset 0 0 0 4px #fff;
+  z-index: 3;
+}
+
+.next:focus-visible::after {
+  box-shadow: inset 0 0 0 4px #fff;
+}
+
+/* ——— Страница работы: строка о студии и подсказка у кнопки ——— */
+
+.wp-about {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted-2);
+  font-size: 14px;
+}
+
+.wp-hint {
+  flex-basis: 100%;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.about-col .cert {
+  font-weight: 400;
+}
+
+/* ——— Нижнее меню уезжает при прокрутке вниз и возвращается при прокрутке вверх ——— */
+
+.dock {
+  transition: transform 0.35s var(--ease), opacity 0.3s;
+}
+
+.dock.away {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 90px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock {
+    transition: none;
+  }
+}
+
+/* Подпись у выбора типа видна: понятно, что тип нужно выбрать. */
+.kinds-legend {
+  flex-basis: 100%;
+  margin-bottom: 2px;
+  padding: 0;
+  color: var(--muted-2);
+  font-size: 13px;
+}
+
+/* После писем — сразу заявка. */
+.letters-foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 28px 0 22px;
+}
+
+.letters-foot .letters-more {
+  padding: 0;
+}
+
+/* На телефоне подсказка стоит сразу под кнопкой заявки, а не после ссылки на YouTube. */
+@media (max-width: 760px) {
+  .wp-actions .btn-white {
+    order: 0;
+  }
+
+  .wp-hint {
+    order: 1;
+    margin: -2px 0 6px;
+  }
+
+  .wp-actions .btn-line {
+    order: 2;
+  }
+
+  .wp-actions .yt-link {
+    order: 3;
+  }
+}
