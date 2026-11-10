@@ -77,6 +77,21 @@
   }
   window.ikatReveal = reveal;
 
+  // Описание кадра для экранных дикторов: по-русски своё, на других языках — клиент и формат.
+  function altOf(w) {
+    return window.LANG === "ru" ? w.alt : tName(w.client) + " — " + tKind(w.kind);
+  }
+
+  // ——— Шапка: закреплена, после прокрутки получает подложку ———
+  var hdr = $(".hdr");
+  if (hdr) {
+    var onScroll = function () {
+      hdr.classList.toggle("scrolled", window.scrollY > 24);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
   // ——— Главная ———
   var hero = $(".hero");
   if (hero && window.WORKS) initHero();
@@ -119,7 +134,7 @@
       .map(function (w, i) {
         return (
           '<div class="hero-slide" data-i="' + i + '">' +
-          '<img src="' + (w.frame || w.cover || w.poster) + '" alt="' + esc(w.alt) + '" width="1280" height="720"' +
+          '<img src="' + (w.frame || w.cover || w.poster) + '" alt="' + esc(altOf(w)) + '" width="1280" height="720"' +
           (i === 0 ? ' fetchpriority="high"' : ' loading="lazy"') + ">" +
           "</div>"
         );
@@ -140,6 +155,7 @@
     var cur = -1;
     var timer = null;
     var DUR = 6000;
+    var paused = false;
 
     function setCaption(w) {
       cap.href = "work.html?w=" + w.slug;
@@ -210,11 +226,47 @@
 
     function schedule() {
       clearTimeout(timer);
-      if (reduced) return;
+      if (reduced || paused) return;
       timer = setTimeout(function () {
         go((cur + 1) % works.length);
       }, DUR);
     }
+
+    // Пауза: курсор или фокус на подписи и цифрах, открыта форма заявки. Полоса прогресса замирает и потом идёт заново.
+    var holds = {};
+    function hold(key, on) {
+      holds[key] = on;
+      var now = Object.keys(holds).some(function (k) {
+        return holds[k];
+      });
+      if (now === paused) return;
+      paused = now;
+      nums.classList.toggle("paused", paused);
+      if (paused) clearTimeout(timer);
+      else if (cur >= 0) {
+        var p = $(".prog", btns[cur]);
+        p.classList.remove("run");
+        void p.offsetWidth;
+        p.classList.add("run");
+        schedule();
+      }
+    }
+    var bot = $(".hero-row");
+    bot.addEventListener("mouseenter", function () {
+      hold("hover", true);
+    });
+    bot.addEventListener("mouseleave", function () {
+      hold("hover", false);
+    });
+    bot.addEventListener("focusin", function () {
+      hold("focus", true);
+    });
+    bot.addEventListener("focusout", function () {
+      hold("focus", false);
+    });
+    document.addEventListener("ikat:form", function (e) {
+      hold("form", e.detail.open);
+    });
 
     btns.forEach(function (b, i) {
       b.addEventListener("click", function () {
@@ -274,17 +326,32 @@
   if (mosaic && window.WORKS) initMosaic();
 
   function initMosaic() {
+    // Фильтр и раскрытый список запоминаются на время визита: возврат со страницы работы попадает в то же место.
     var filter = "all";
     var expanded = false;
+    try {
+      filter = sessionStorage.getItem("ikat_filter") || "all";
+      expanded = sessionStorage.getItem("ikat_expanded") === "1";
+    } catch (e) {}
+    if (filter !== "all" && !window.CATS[filter]) filter = "all";
     var more = $(".works-more");
+    function remember() {
+      try {
+        sessionStorage.setItem("ikat_filter", filter);
+        sessionStorage.setItem("ikat_expanded", expanded ? "1" : "0");
+      } catch (e) {}
+    }
+    $$(".filters .chip").forEach(function (x) {
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-filter") === filter));
+    });
 
-    function tile(w, big) {
+    function tile(w, big, n) {
       return (
         '<a class="tile rv" href="work.html?w=' + w.slug + '" data-slug="' + w.slug + '">' +
-        '<img src="' + (w.frame || w.cover || w.poster) + '" alt="' + esc(w.alt) + '" width="1280" height="720" loading="lazy" decoding="async">' +
+        '<img src="' + (w.frame || w.cover || w.poster) + '" alt="' + esc(altOf(w)) + '" width="1280" height="720" loading="lazy" decoding="async">' +
         // Подпись как у продакшн-студий: номер и категория сверху, крупный клиент и формат снизу.
         '<span class="tile-top cap" aria-hidden="true"><span class="tile-n">' +
-        String(window.WORKS.indexOf(w) + 1).padStart(2, "0") +
+        String(n).padStart(2, "0") +
         '</span><span class="tile-tag">' + esc(tCat(w.cat)) + "</span></span>" +
         '<span class="tile-cap"><strong class="tile-client">' + esc(tName(w.client)) + "</strong>" +
         '<span class="tile-meta cap">' + esc(tKind(w.kind)) + " · " + w.dur + "</span></span>" +
@@ -312,8 +379,8 @@
         var row = list.slice(i, i + n);
         html +=
           '<div class="mosaic-row r' + n + '" data-stagger>' +
-          row.map(function (w) {
-            return tile(w, n === 1);
+          row.map(function (w, k) {
+            return tile(w, n === 1, i + k + 1);
           }).join("") +
           "</div>";
         i += n;
@@ -332,12 +399,14 @@
           x.setAttribute("aria-pressed", String(x === c));
         });
         window.track("filter_click", { filter: filter });
+        remember();
         render();
       });
     });
 
     $(".works-more button").addEventListener("click", function () {
       expanded = true;
+      remember();
       render();
     });
 

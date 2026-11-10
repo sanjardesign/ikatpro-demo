@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="light">
+<body class="light" data-title="title.about">
 <a class="skip" href="#main" data-i18n="skip">К содержанию</a>
 
 <header class="hdr">
@@ -26,11 +26,11 @@
       <button type="button" data-lang="uz" aria-pressed="false">UZ</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
     </div>
-    <button type="button" class="btn btn-white" data-form=""><span data-i18n="cta.short">Обсудить</span><span class="ctx" data-i18n="cta.ctx"> проект</span> <span class="arr" aria-hidden="true">→</span></button>
+    <button type="button" class="btn btn-white" data-form=""><span><span data-i18n="cta.short">Обсудить</span><span class="ctx" data-i18n="cta.ctx"> проект</span></span><span class="arr" aria-hidden="true">→</span></button>
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
   <section class="about-hero">
     <span class="eyebrow rv" data-i18n="about.eyebrow">О нас · с 2018 года</span>
     <h1 class="rv" data-i18n="about.title">Видеопродакшн полного цикла в Ташкенте</h1>
@@ -51,13 +51,13 @@
     <section class="about-col rv">
       <span class="eyebrow">02</span>
       <h2 data-i18n="about.c2">Студия</h2>
-      <p><span data-i18n-html="about.c2t">Ташкент, Яккасарайский район, ул. Восита Вохидова, 92.<br>Пн–Сб 10:00–19:00.</span><br><span data-i18n="about.c2price">Аренда студии</span>: <span class="ph">[цена]</span></p>
+      <p><span data-i18n-html="about.c2t">Ташкент, Яккасарайский район, ул. Восита Вохидова, 92.<br>Пн–Сб 10:00–19:00.</span></p>
     </section>
     <section class="about-col rv">
       <span class="eyebrow">03</span>
       <h2 data-i18n="about.c3">Статус</h2>
-      <p><span data-i18n="about.c3t">Резидент Uzbekistan Creative Park с 12.06.2026 (решение CP-DEC-2026-000114).</span> <span data-i18n="about.c3m">Член</span> <span class="ph">[название ассоциации]</span>.</p>
-      <a href="#"><span data-i18n="about.cert">Свидетельство CPR-2026-000114</span> <span class="ph">&nbsp;[файл]</span></a>
+      <p data-i18n="about.c3t">Резидент Uzbekistan Creative Park с 12.06.2026 (решение CP-DEC-2026-000114).</p>
+      <p class="cert" data-i18n="about.certLabel">Свидетельство CPR-2026-000114</p>
     </section>
   </div>
 
@@ -70,33 +70,37 @@
     <div class="contact-grid" data-stagger>
       <div class="contact rv">
         <span class="eyebrow" data-i18n="c.ads">Реклама и фильмы</span>
-        <span class="contact-name">Сабрин Асадова</span>
-        <a href="https://t.me/Ikat_pro_ad?start=ads" target="_blank" rel="noopener" data-tg="contacts">Telegram ↗</a>
+        <span class="contact-name" data-uz="Sabrin Asadova" data-en="Sabrin Asadova">Сабрин Асадова</span>
         <a href="tel:+998773779911" data-tg="contacts">+998 77 377 99 11</a>
+        <a href="https://t.me/Ikat_pro_ad?start=ads" target="_blank" rel="noopener" data-tg="contacts" data-i18n="c.tg">Telegram студии ↗</a>
+        <button type="button" class="btn btn-white" data-form="Рекламный ролик"><span data-i18n="c.btn.ads">Обсудить ролик</span><span class="arr" aria-hidden="true">→</span></button>
       </div>
       <div class="contact rv">
         <span class="eyebrow" data-i18n="c.studio">Аренда студии</span>
-        <span class="contact-name">Шарофат Махмудова</span>
-        <a href="https://t.me/Ikat_pro_ad?start=studio" target="_blank" rel="noopener" data-tg="contacts">Telegram ↗</a>
+        <span class="contact-name" data-uz="Sharofat Maxmudova" data-en="Sharofat Makhmudova">Шарофат Махмудова</span>
         <a href="mailto:studio@ikatpro.uz">studio@ikatpro.uz</a>
-        <span class="note" data-i18n="c.address">ул. Восита Вохидова, 92 · Пн–Сб 10:00–19:00</span>
+        <a href="https://t.me/Ikat_pro_ad?start=studio" target="_blank" rel="noopener" data-tg="contacts" data-i18n="c.tg">Telegram студии ↗</a>
+        <button type="button" class="btn btn-white" data-form="Аренда студии"><span data-i18n="c.btn.studio">Арендовать студию</span><span class="arr" aria-hidden="true">→</span></button>
       </div>
       <div class="contact rv">
         <span class="eyebrow" data-i18n="c.smm">Соцсети и SMM</span>
-        <span class="contact-name">Иззатилла Нигматуллаев</span>
-        <a href="https://t.me/Ikat_pro_ad?start=smm" target="_blank" rel="noopener" data-tg="contacts">Telegram ↗</a>
+        <span class="contact-name" data-uz="Izzatilla Nigmatullaev" data-en="Izzatilla Nigmatullaev">Иззатилла Нигматуллаев</span>
         <a href="mailto:smm@ikatpro.uz">smm@ikatpro.uz</a>
+        <a href="https://t.me/Ikat_pro_ad?start=smm" target="_blank" rel="noopener" data-tg="contacts" data-i18n="c.tg">Telegram студии ↗</a>
+        <button type="button" class="btn btn-white" data-form="Контент для соцсетей"><span data-i18n="c.btn.smm">Обсудить контент</span><span class="arr" aria-hidden="true">→</span></button>
       </div>
     </div>
+    <p class="where rv"><span class="eyebrow" data-i18n="c.where">Студия</span> <span data-i18n="c.address">Ташкент, ул. Восита Вохидова, 92 · Пн–Сб 10:00–19:00</span> <a href="https://yandex.uz/maps/?text=%D0%A2%D0%B0%D1%88%D0%BA%D0%B5%D0%BD%D1%82%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%92%D0%BE%D1%81%D0%B8%D1%82%D0%B0%20%D0%92%D0%BE%D1%85%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0%2C%2092" target="_blank" rel="noopener" data-i18n="c.map">Открыть на карте ↗</a></p>
     <p class="jobs"><span data-i18n="c.jobs">Резюме</span>: <a href="mailto:jobs@ikatpro.uz">jobs@ikatpro.uz</a> · <span data-i18n="c.mail">Почта</span>: <a href="mailto:info@ikatpro.uz">info@ikatpro.uz</a> · <span data-i18n="c.phone">Телефон</span>: <a href="tel:+998773779911" data-tg="contacts">+998 77 377 99 11</a></p>
   </section>
 </main>
 
 <footer class="ftr">
-  <a class="ftr-big" href="https://t.me/Ikat_pro_ad" target="_blank" rel="noopener" data-tg="footer">
-    <span class="eyebrow" data-i18n="ftr.eyebrow">Новые работы и бэкстейджи</span>
-    <span class="ftr-big-t" data-i18n-html="ftr.big">Подписаться<br>в Telegram ↗</span>
-  </a>
+  <button type="button" class="ftr-big" data-form="">
+    <span class="eyebrow" data-i18n="ftr.eyebrow">Три поля, ответим в течение рабочего дня</span>
+    <span class="ftr-big-t" data-i18n-html="ftr.big">Обсудить<br>проект →</span>
+  </button>
+  <a class="ftr-tg cap" href="https://t.me/Ikat_pro_ad" target="_blank" rel="noopener" data-tg="footer" data-i18n="ftr.tg">Новые работы и бэкстейджи в Telegram ↗</a>
   <div class="ftr-bot cap">
     <div class="ftr-soc">
       <a href="https://www.instagram.com/ikat.pro" target="_blank" rel="noopener">Instagram</a>

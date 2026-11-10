@@ -68,8 +68,8 @@ window.WORKS = [
     dur: "0:16",
     cat: "ads",
     videos: [
-      { id: "fAl8UrWx2lg", label: "Ролик 1", dur: "0:16" },
-      { id: "G-lREqwuLYI", label: "Ролик 2", dur: "0:16" },
+      { id: "fAl8UrWx2lg", label: "№ 1", dur: "0:16" },
+      { id: "G-lREqwuLYI", label: "№ 2", dur: "0:16" },
     ],
     poster: "assets/img/G-lREqwuLYI.jpg",
     frame: "assets/img/frame-indorama.jpg",
@@ -101,12 +101,12 @@ window.WORKS = [
   {
     slug: "saxovat",
     client: "Saxovat",
-    kind: "Серия роликов",
+    kind: "Серия роликов, № 1–2",
     dur: "0:16",
     cat: "social",
     videos: [
-      { id: "RSguq3X2KqI", label: "Серия 2", dur: "0:16" },
-      { id: "VjDtSwXtJs4", label: "Серия 3", dur: "0:16" },
+      { id: "RSguq3X2KqI", label: "№ 1", dur: "0:16" },
+      { id: "VjDtSwXtJs4", label: "№ 2", dur: "0:16" },
     ],
     poster: "assets/img/RSguq3X2KqI.jpg",
     cover: "assets/covers/RSguq3X2KqI.jpg",
@@ -160,7 +160,7 @@ window.WORKS = [
   },
   {
     slug: "open-budjet",
-    client: "Open Budjet",
+    client: "Open Budget",
     kind: "Ролик",
     dur: "1:08",
     cat: "corporate",
@@ -171,12 +171,12 @@ window.WORKS = [
     ],
     poster: "assets/img/lwlU5npKf6E.jpg",
     cover: "assets/covers/lwlU5npKf6E.jpg",
-    alt: "Пожилая женщина с кувшином, ролик Open Budjet",
+    alt: "Пожилая женщина с кувшином, ролик Open Budget",
   },
 
   {
     slug: "hpc",
-    client: "HPC — ЖК в Каканде",
+    client: "HPC — ЖК в Коканде",
     kind: "Имиджевый ролик",
     dur: "2:40",
     cat: "corporate",
@@ -197,7 +197,7 @@ window.WORKS = [
   },
   {
     slug: "open-budjet-backstage",
-    client: "Open Budjet",
+    client: "Open Budget",
     kind: "Бэкстейдж",
     dur: "2:34",
     cat: "backstage",
@@ -248,7 +248,7 @@ window.FEATURED = ["komatsu", "aion", "mannol", "indorama-oltin", "merci", "show
 window.CATS = { ads: "Реклама", corporate: "Корпоративное", social: "Соцсети", backstage: "Бэкстейдж" };
 
 // Старые адреса языковых версий ведут на общую страницу работы.
-window.ALIASES = { "open-budjet-ru": "open-budjet", "open-budjet-uz": "open-budjet" };
+window.ALIASES = { "open-budjet-ru": "open-budjet", "open-budjet-uz": "open-budjet", "open-budget": "open-budjet" };
 
 window.workBySlug = function (slug) {
   slug = window.ALIASES[slug] || slug;
@@ -273,6 +273,6 @@ window.CLIENTS = [
   { name: "Eclair", logo: null },
   { name: "Landor", logo: null },
   { name: "Avangard", logo: null },
-  { name: "Open Budjet", logo: null },
+  { name: "Open Budget", logo: null },
   { name: "HPC", logo: null },
 ];

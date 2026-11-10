@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-title="title.team">
 <a class="skip" href="#main" data-i18n="skip">К содержанию</a>
 
 <header class="hdr">
@@ -26,11 +26,11 @@
       <button type="button" data-lang="uz" aria-pressed="false">UZ</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
     </div>
-    <button type="button" class="btn btn-white" data-form=""><span data-i18n="cta.short">Обсудить</span><span class="ctx" data-i18n="cta.ctx"> проект</span> <span class="arr" aria-hidden="true">→</span></button>
+    <button type="button" class="btn btn-white" data-form=""><span><span data-i18n="cta.short">Обсудить</span><span class="ctx" data-i18n="cta.ctx"> проект</span></span><span class="arr" aria-hidden="true">→</span></button>
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
   <section class="team" aria-labelledby="team-title">
     <div class="team-bg" aria-hidden="true">
       <img src="assets/img/frame-komatsu-samurai.jpg" alt="" width="1280" height="720">
@@ -53,7 +53,7 @@
       <li><button type="button" class="person" aria-pressed="false" data-name-uz="Sevinch Azamatova" data-name-en="Sevinch Azamatova" data-role-uz="Jurnalist" data-role-en="Journalist"><img class="person-ava" src="assets/team/azamatova.jpg" alt="" width="324" height="516" loading="lazy"><span class="person-txt"><span class="person-name">Севинч Азаматова</span><span class="person-role">Журналист</span></span></button></li>
       <li><button type="button" class="person" aria-pressed="false" data-name-uz="Sabrin Asadova" data-name-en="Sabrin Asadova" data-role-uz="Prodyuser · katta loyiha menejeri" data-role-en="Producer · senior project manager"><img class="person-ava" src="assets/team/asadova.jpg" alt="" width="324" height="516" loading="lazy"><span class="person-txt"><span class="person-name">Сабрин Асадова</span><span class="person-role">Продюсер · старший менеджер проектов</span></span></button></li>
       <li><button type="button" class="person" aria-pressed="false" data-name-uz="Izzatilla Nigmatullaev" data-name-en="Izzatilla Nigmatullaev" data-role-uz="Media prodyuser" data-role-en="Media producer"><img class="person-ava" src="assets/team/nigmatullaev.jpg" alt="" width="324" height="516" loading="lazy"><span class="person-txt"><span class="person-name">Иззатилла Нигматуллаев</span><span class="person-role">Медиапродюсер</span></span></button></li>
-      <li><button type="button" class="person" aria-pressed="false" data-name-uz="Sanjar Bobojonov" data-name-en="Sanjar Bobojonov" data-role-uz="Grafik dizayner · logger" data-role-en="Graphic designer · logger"><img class="person-ava" src="assets/team/bobojonov.jpg" alt="" width="324" height="516" loading="lazy"><span class="person-txt"><span class="person-name">Санжар Бобожонов</span><span class="person-role">Графический дизайнер · логгер</span></span></button></li>
+      <li><button type="button" class="person" aria-pressed="false" data-name-uz="Sanjar Bobojonov" data-name-en="Sanjar Bobojonov" data-role-uz="Grafik dizayner · logger" data-role-en="Graphic designer · footage logger"><img class="person-ava" src="assets/team/bobojonov.jpg" alt="" width="324" height="516" loading="lazy"><span class="person-txt"><span class="person-name">Санжар Бобожонов</span><span class="person-role">Графический дизайнер · логгер</span></span></button></li>
       <li><button type="button" class="person" aria-pressed="false" data-name-uz="Zarina Tuydjanova" data-name-en="Zarina Tuydjanova" data-role-uz="Rejissyor · ssenariynavis" data-role-en="Director · scriptwriter"><img class="person-ava" src="assets/team/tuydzhanova.jpg" alt="" width="324" height="516" loading="lazy"><span class="person-txt"><span class="person-name">Зарина Туйджанова</span><span class="person-role">Режиссёр · сценарист</span></span></button></li>
       <li><button type="button" class="person" aria-pressed="false" data-name-uz="Behruz Egamnazarov" data-name-en="Behruz Egamnazarov" data-role-uz="Videomontajçi" data-role-en="Video editor"><img class="person-ava" src="assets/team/egamnazarov.jpg" alt="" width="324" height="516" loading="lazy"><span class="person-txt"><span class="person-name">Бехруз Эгамназаров</span><span class="person-role">Видеомонтажёр</span></span></button></li>
       <li><button type="button" class="person" aria-pressed="false" data-name-uz="Javohir Temirov" data-name-en="Javokhir Temirov" data-role-uz="Videomontajçi" data-role-en="Video editor"><img class="person-ava" src="assets/team/temirov.jpg" alt="" width="324" height="516" loading="lazy"><span class="person-txt"><span class="person-name">Жавохир Темиров</span><span class="person-role">Видеомонтажёр</span></span></button></li>
@@ -72,16 +72,16 @@
         <img src="assets/team/ergashev.jpg" alt="" width="324" height="516" loading="lazy">
         </div>
       </div>
-      <p class="team-credit" data-i18n="team.note">Фон — кадр из работы студии.</p>
     </div>
   </section>
 </main>
 
 <footer class="ftr">
-  <a class="ftr-big" href="https://t.me/Ikat_pro_ad" target="_blank" rel="noopener" data-tg="footer">
-    <span class="eyebrow" data-i18n="ftr.eyebrow">Новые работы и бэкстейджи</span>
-    <span class="ftr-big-t" data-i18n-html="ftr.big">Подписаться<br>в Telegram ↗</span>
-  </a>
+  <button type="button" class="ftr-big" data-form="">
+    <span class="eyebrow" data-i18n="ftr.eyebrow">Три поля, ответим в течение рабочего дня</span>
+    <span class="ftr-big-t" data-i18n-html="ftr.big">Обсудить<br>проект →</span>
+  </button>
+  <a class="ftr-tg cap" href="https://t.me/Ikat_pro_ad" target="_blank" rel="noopener" data-tg="footer" data-i18n="ftr.tg">Новые работы и бэкстейджи в Telegram ↗</a>
   <div class="ftr-bot cap">
     <div class="ftr-soc">
       <a href="https://www.instagram.com/ikat.pro" target="_blank" rel="noopener">Instagram</a>

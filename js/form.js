@@ -1,9 +1,11 @@
 /*
   Форма «Обсудить проект» — модальное окно на всех страницах.
-  Открывается любой кнопкой с атрибутом data-form (значение — тип, выбранный заранее, например data-form="Рекламный ролик").
+  Открывается любой кнопкой с атрибутом data-form (значение — тип, выбранный заранее, например data-form="Аренда студии").
+  data-task на кнопке подставляет текст в поле «Задача» (например, «Хочу ролик как Komatsu»).
   Сервера нет: в демо заявка проверяется, показывается «Спасибо», а объект заявки пишется в консоль.
 */
 (function () {
+  // Значения типов остаются русскими (они уходят в заявку), подписи на кнопках переводятся.
   var KINDS = ["Рекламный ролик", "Имиджевый фильм", "Контент для соцсетей", "Аренда студии", "Другое"];
   var kind = KINDS[0];
   var opener = null;
@@ -14,6 +16,7 @@
   modal.innerHTML =
     '<div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="form-title" tabindex="-1">' +
     '<button type="button" class="modal-x" aria-label="' + t("close") + '">×</button>' +
+    '<div class="modal-scroll">' +
     '<form class="form" novalidate>' +
     "<div>" +
     '<h2 class="form-title" id="form-title">' + t("form.title") + "</h2>" +
@@ -31,13 +34,14 @@
     '<button type="submit" class="btn btn-white">' + t("form.send") + "</button>" +
     '<a class="btn btn-line" href="https://t.me/Ikat_pro_ad?start=site" target="_blank" rel="noopener" data-tg="form">' + t("form.tg") + "</a>" +
     "</div>" +
-    '<a class="form-brief" href="#" title="' + t("form.briefLater") + '">' + t("form.brief") + ' <span class="ph">' + t("form.briefLater") + "</span></a>" +
     "</form>" +
-    '<div class="thanks out" hidden aria-live="polite">' +
+    '<div class="thanks" hidden aria-live="polite">' +
     '<span class="thanks-mark" aria-hidden="true">✓</span>' +
     '<h2 class="form-title">' + t("form.thanks") + "</h2>" +
-    "<p>" + t("form.thanksText") + "</p>" +
+    '<p class="thanks-who"></p>' +
+    '<p class="thanks-to"></p>' +
     '<button type="button" class="btn btn-line" data-close>' + t("close") + "</button>" +
+    "</div>" +
     "</div>" +
     "</div>";
   document.body.appendChild(modal);
@@ -54,6 +58,7 @@
   var form = modal.querySelector(".form");
   var thanks = modal.querySelector(".thanks");
   var chips = modal.querySelectorAll(".chip");
+  var msgs = { name: t("err.name"), contact: t("err.contact"), task: t("err.task") };
 
   function setKind(k) {
     kind = KINDS.indexOf(k) >= 0 ? k : kind;
@@ -63,12 +68,9 @@
   }
 
   function focusables() {
-    return Array.prototype.filter.call(
-      box.querySelectorAll("button, a[href], input"),
-      function (el) {
-        return !el.closest("[hidden]") && el.offsetParent !== null;
-      }
-    );
+    return Array.prototype.filter.call(box.querySelectorAll("button, a[href], input"), function (el) {
+      return !el.closest("[hidden]") && el.offsetParent !== null;
+    });
   }
 
   function open(k, from) {
@@ -76,9 +78,13 @@
     if (k) setKind(k);
     // После «Спасибо» форма снова чистая.
     if (!thanks.hidden) reset();
+    var task = from && from.getAttribute && from.getAttribute("data-task");
+    if (task && !form.task.value) form.task.value = task;
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.documentElement.style.overflow = "hidden";
+    // Страница под окном замирает: карусель встаёт на паузу, плеер останавливается.
+    document.dispatchEvent(new CustomEvent("ikat:form", { detail: { open: true } }));
     setTimeout(function () {
       var first = modal.querySelector('.chip[aria-pressed="true"]') || focusables()[0];
       if (first) first.focus();
@@ -90,42 +96,57 @@
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     document.documentElement.style.overflow = "";
+    document.dispatchEvent(new CustomEvent("ikat:form", { detail: { open: false } }));
     if (opener && opener.focus) opener.focus();
   }
 
   function reset() {
     form.reset();
     form.querySelectorAll(".field").forEach(function (f) {
-      f.classList.remove("err");
-      f.querySelector(".field-err").textContent = "";
+      setErr(f, false);
     });
     thanks.hidden = true;
-    thanks.classList.add("out");
     thanks.classList.remove("show");
     form.hidden = false;
     form.classList.remove("out");
   }
 
+  function isBad(f) {
+    var v = f.querySelector("input").value.trim();
+    if (v.length < 2) return true;
+    if (f.dataset.field !== "contact") return false;
+    var digits = v.replace(/\D/g, "");
+    var okPhone = digits.length >= 7;
+    var okTg = /^@?[A-Za-z][\w.]{3,}$/.test(v.replace(/\s/g, ""));
+    var okMail = /^\S+@\S+\.\S{2,}$/.test(v);
+    return !(okPhone || okTg || okMail);
+  }
+
+  function setErr(f, bad) {
+    var inp = f.querySelector("input");
+    f.classList.toggle("err", bad);
+    inp.setAttribute("aria-invalid", String(bad));
+    f.querySelector(".field-err").textContent = bad ? msgs[f.dataset.field] : "";
+  }
+
   function validate() {
     var ok = true;
-    var msgs = { name: t("err.name"), contact: t("err.contact"), task: t("err.task") };
     form.querySelectorAll(".field").forEach(function (f) {
-      var inp = f.querySelector("input");
-      var v = inp.value.trim();
-      var bad = v.length < 2;
-      if (f.dataset.field === "contact" && !bad) {
-        bad = !/^@?[\w.]{4,}$/.test(v.replace(/[\s()+-]/g, "")) && !/\d{7,}/.test(v.replace(/\D/g, ""));
-      }
-      f.classList.toggle("err", bad);
-      inp.setAttribute("aria-invalid", String(bad));
-      f.querySelector(".field-err").textContent = bad ? msgs[f.dataset.field] : "";
+      var bad = isBad(f);
+      setErr(f, bad);
       if (bad && ok) {
-        inp.focus();
+        f.querySelector("input").focus();
         ok = false;
       }
     });
     return ok;
   }
+
+  // Ошибка гаснет, как только поле исправили.
+  form.addEventListener("input", function (e) {
+    var f = e.target.closest(".field");
+    if (f && f.classList.contains("err") && !isBad(f)) setErr(f, false);
+  });
 
   chips.forEach(function (c) {
     c.addEventListener("click", function () {
@@ -152,13 +173,17 @@
     console.log("[lead]", lead);
     window.track("lead_form_submit", { type: kind });
 
-    // Плавная замена формы на «Спасибо».
+    // Кто ответит и куда: человек видит, что заявка дошла.
+    thanks.querySelector(".thanks-who").textContent = t(kind === "Аренда студии" ? "who.studio" : "who.prod");
+    thanks.querySelector(".thanks-to").textContent = t("form.thanksTo") + ": " + lead.contact;
+
+    // Плавная замена формы на «Спасибо». Форма убирается из вёрстки и из обхода клавиатурой.
     form.classList.add("out");
     setTimeout(function () {
       form.hidden = true;
       thanks.hidden = false;
+      modal.querySelector(".modal-scroll").scrollTop = 0;
       requestAnimationFrame(function () {
-        thanks.classList.remove("out");
         thanks.classList.add("show");
         thanks.querySelector("[data-close]").focus();
       });

@@ -2469,3 +2469,458 @@ button {
 .client-logo.np:hover {
   background: transparent;
 }
+
+/* ═══════════ Правки по итогам юзабилити-теста ═══════════ */
+
+/* Атрибут hidden должен скрывать и элементы с display:flex (форма, «Спасибо», кнопка «Все работы»). */
+[hidden] {
+  display: none !important;
+}
+
+/* ——— Шапка закреплена: кнопка заявки всегда под рукой ——— */
+
+.hdr {
+  position: fixed;
+  transition: background-color 0.3s, padding 0.3s;
+}
+
+.hdr.scrolled {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: rgba(0, 0, 0, 0.82);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.light .hdr.scrolled {
+  background: rgba(242, 240, 235, 0.9);
+}
+
+.btn > span:first-child {
+  white-space: nowrap;
+}
+
+/* ——— Первый экран помещается в окно целиком ——— */
+
+.hero {
+  height: min(880px, 100svh);
+  min-height: 520px;
+}
+
+/* Общая вуаль: белый текст читается и на светлых кадрах. */
+.hero-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.hero-shade-b {
+  height: 70%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0));
+}
+
+.badge {
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-size: 12px;
+}
+
+/* Цифры карусели: крупнее, ярче, с подчёркнутой полосой — видно, что это кнопки. */
+.num {
+  font-size: 14px;
+}
+
+.num-k {
+  opacity: 0.8;
+}
+
+.bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.nums.paused .prog.run {
+  animation-play-state: paused;
+}
+
+.hcap-meta {
+  font-size: 13px;
+}
+
+/* ——— Мелкий текст: не меньше 12 px ——— */
+
+.clients-label,
+.tile-top,
+.tile-cap .tile-meta,
+.tile-pv,
+.credits dt {
+  font-size: 12px;
+}
+
+/* Плитки: темнее под подписями, рамка фокуса внутри плитки. */
+.tile::before {
+  height: 38%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0));
+}
+
+.tile::after {
+  height: 66%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0));
+}
+
+.tile-tag {
+  color: #fff;
+}
+
+.tile:focus-visible,
+.next:focus-visible {
+  outline-offset: -4px;
+}
+
+/* ——— Окно заявки: высота по содержимому, не выше экрана ——— */
+
+.modal-box {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - var(--pad) * 2);
+  padding: 0;
+  overflow: hidden;
+}
+
+.modal-scroll {
+  padding: 36px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.modal-x {
+  z-index: 2;
+  background: #0e0e0e;
+}
+
+/* Место под ошибку есть всегда: кнопка «Отправить» не прыгает. */
+.field-err {
+  min-height: 16px;
+}
+
+.field:focus-within {
+  color: #fff;
+}
+
+.inp:focus {
+  border-bottom-width: 2px;
+  box-shadow: 0 6px 0 -4px rgba(255, 255, 255, 0.35);
+}
+
+.thanks {
+  padding: 8px 0 0;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.thanks.show {
+  opacity: 1;
+  transform: none;
+}
+
+.thanks .thanks-to {
+  color: #fff;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+/* ——— Страница работы ——— */
+
+.wp-top {
+  gap: 14px;
+}
+
+.wp-logo {
+  flex-shrink: 0;
+  justify-self: auto;
+}
+
+.wp-logo .logo-svg {
+  height: 22px;
+}
+
+.wp-back {
+  flex: 1;
+  padding-left: 14px;
+  border-left: 1px solid var(--line-3);
+}
+
+.wp-tools {
+  align-items: center;
+}
+
+.wp-tools .btn {
+  min-height: 44px;
+}
+
+.wp-under {
+  align-items: center;
+  padding: 22px var(--pad) 28px;
+  color: var(--fg);
+}
+
+.wp-title h1 {
+  margin: 0;
+  font-size: clamp(28px, 3.4vw, 52px);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.wp-title .cap {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.wp-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.wp-actions .yt-link {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.frames {
+  margin: 0;
+}
+
+.next {
+  margin: 0;
+}
+
+/* ——— Контакты: кнопка заявки у каждого направления, крупные зоны нажатия ——— */
+
+.contact {
+  gap: 2px;
+  padding-bottom: 28px;
+}
+
+.contact a {
+  min-height: 44px;
+}
+
+.contact .btn {
+  align-self: flex-start;
+  margin-top: 12px;
+}
+
+.where {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 18px 0;
+  border-top: 1px solid var(--line-3);
+  font-size: 15px;
+}
+
+.where a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.jobs {
+  margin: 0;
+  line-height: 44px;
+}
+
+.jobs a {
+  display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ——— Подвал: главный призыв — заявка ——— */
+
+button.ftr-big {
+  width: 100%;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.ftr-tg {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 var(--pad);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ftr-tg:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.light .ftr-tg {
+  border-top-color: #d9d6cf;
+}
+
+.about-col .cert {
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+/* ——— Планшет: меню уходит в нижнюю плашку, логотип не перекрывается ——— */
+
+@media (max-width: 900px) {
+  .hdr {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hdr .nav {
+    display: none;
+  }
+
+  .dock {
+    position: fixed;
+    left: 50%;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    z-index: 30;
+    display: flex;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(20, 20, 20, 0.85);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .dock a,
+  .dock button {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+  }
+
+  .dock a[aria-current="page"] {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  /* На планшете языки остаются в шапке. */
+  .dock-lang {
+    display: none;
+  }
+
+  body {
+    padding-bottom: 76px;
+  }
+
+  .wp-tools .lang {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .dock-lang {
+    display: flex;
+  }
+
+  .dock {
+    font-size: 11px;
+  }
+
+  .dock a {
+    padding: 0 10px;
+  }
+
+  .hero {
+    height: 100svh;
+  }
+
+  .modal-box {
+    max-height: 100dvh;
+  }
+
+  .modal-scroll {
+    padding: 28px var(--pad) calc(28px + env(safe-area-inset-bottom));
+  }
+
+  .wp-top {
+    gap: 8px;
+    padding: 8px var(--pad);
+  }
+
+  .wp-logo .logo-svg {
+    height: 18px;
+  }
+
+  .wp-back {
+    padding-left: 8px;
+  }
+
+  .wp-kind {
+    display: none;
+  }
+
+  .wp-tools .btn {
+    padding: 0 14px;
+  }
+
+  .wp-under {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wp-actions .btn {
+    width: 100%;
+  }
+}
+
+/* Якоря не прячутся под закреплённой шапкой. */
+#work,
+#contacts {
+  scroll-margin-top: 72px;
+}
+
+/* Под плеером на первом экране остаётся место для названия и кнопки заявки. */
+.player {
+  max-height: calc(100svh - 200px);
+}
+
+@media (max-width: 760px) {
+  .player {
+    max-height: none;
+  }
+}
