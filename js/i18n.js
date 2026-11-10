@@ -240,7 +240,7 @@
       "wp.youtube": "YouTube'da köriş ↗",
       "wp.episodes": "Loyiha roliklari",
       "wp.clip": "Rolik",
-      "ver.ru": "Ruscha versiya",
+      "ver.ru": "Rusça versiya",
       "ver.uz": "Özbekça versiya",
       "wp.industry": "[Soha]",
       "wp.result": "[natija sarlavhasi]",
