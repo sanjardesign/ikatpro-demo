@@ -177,9 +177,16 @@
     thanks.querySelector(".thanks-who").textContent = t(kind === "Аренда студии" ? "who.studio" : "who.prod");
     thanks.querySelector(".thanks-to").textContent = t("form.thanksTo") + ": " + lead.contact;
 
+    // Кнопка показывает, что заявка уходит, и не даёт нажать дважды.
+    var send = form.querySelector('button[type="submit"]');
+    send.disabled = true;
+    send.textContent = t("form.sending");
+
     // Плавная замена формы на «Спасибо». Форма убирается из вёрстки и из обхода клавиатурой.
     form.classList.add("out");
     setTimeout(function () {
+      send.disabled = false;
+      send.textContent = t("form.send");
       form.hidden = true;
       thanks.hidden = false;
       modal.querySelector(".modal-scroll").scrollTop = 0;

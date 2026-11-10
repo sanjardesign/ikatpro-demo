@@ -2924,3 +2924,98 @@ button.ftr-big {
     max-height: none;
   }
 }
+
+/* ——— Кнопка паузы карусели ——— */
+
+.nums {
+  align-items: center;
+}
+
+.num-pause {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-left: 6px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: background-color 0.25s, border-color 0.25s;
+}
+
+.num-pause:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Две полоски — пауза, треугольник — запуск. */
+.num-pause span {
+  width: 10px;
+  height: 12px;
+  border-left: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+
+.num-pause[aria-pressed="true"] span {
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-style: solid;
+  border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent #fff;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+  transform: none;
+}
+
+@media (max-width: 760px) {
+  .num-pause {
+    width: 40px;
+    height: 40px;
+    margin-left: 2px;
+  }
+
+  .num {
+    min-width: 34px;
+  }
+
+  .bar {
+    width: 26px;
+  }
+}
+
+/* Нижнее меню на телефоне: текст 12 px, чуть плотнее по бокам. */
+@media (max-width: 760px) {
+  .dock {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  .dock a {
+    padding: 0 8px;
+  }
+
+  .dock .dock-lang button {
+    padding: 0 7px;
+  }
+}
+
+/* Узкие телефоны (360 px): меню помещается с запасом. */
+@media (max-width: 380px) {
+  .dock {
+    letter-spacing: 0.02em;
+  }
+
+  .dock a {
+    padding: 0 6px;
+  }
+
+  .dock .dock-lang button {
+    padding: 0 5px;
+  }
+}

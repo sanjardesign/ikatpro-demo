@@ -150,6 +150,12 @@
       })
       .join("");
 
+    // Явная пауза: автосмену можно остановить и запустить снова.
+    nums.insertAdjacentHTML(
+      "beforeend",
+      '<button type="button" class="num-pause" aria-pressed="false" aria-label="' + t("hero.pause") + '"><span aria-hidden="true"></span></button>'
+    );
+
     var slides = $$(".hero-slide", stage);
     var btns = $$(".num", nums);
     var cur = -1;
@@ -251,6 +257,15 @@
         schedule();
       }
     }
+    var pauseBtn = $(".num-pause", nums);
+    if (reduced) pauseBtn.hidden = true;
+    pauseBtn.addEventListener("click", function () {
+      var on = pauseBtn.getAttribute("aria-pressed") !== "true";
+      pauseBtn.setAttribute("aria-pressed", String(on));
+      pauseBtn.setAttribute("aria-label", t(on ? "hero.play" : "hero.pause"));
+      hold("user", on);
+    });
+
     var bot = $(".hero-row");
     bot.addEventListener("mouseenter", function () {
       hold("hover", true);

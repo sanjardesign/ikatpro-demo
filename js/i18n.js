@@ -7,6 +7,9 @@
 (function () {
   var D = {
     ru: {
+      "hero.pause": "Остановить смену работ",
+      "hero.play": "Запустить смену работ",
+      "form.sending": "Отправляем…",
       skip: "К содержанию",
       "nav.work": "Работы",
       "nav.team": "Команда",
@@ -156,6 +159,9 @@
       "about.certLabel": "Свидетельство CPR-2026-000114",
     },
     uz: {
+      "hero.pause": "Almaşişni töxtatiş",
+      "hero.play": "Almaşişni davom ettiriş",
+      "form.sending": "Yuborilmoqda…",
       skip: "Asosiy qismga",
       "nav.work": "Işlar",
       "nav.team": "Jamoa",
@@ -301,6 +307,9 @@
       "about.certLabel": "CPR-2026-000114 guvohnomasi",
     },
     en: {
+      "hero.pause": "Pause the slideshow",
+      "hero.play": "Play the slideshow",
+      "form.sending": "Sending…",
       skip: "Skip to content",
       "nav.work": "Work",
       "nav.team": "Team",
