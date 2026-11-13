@@ -3400,3 +3400,355 @@ button.ftr-big {
     transition: none;
   }
 }
+
+/* ═══════════ Контакты, студия, меню из четырёх пунктов ═══════════ */
+
+/* Языки на телефоне: список в шапке вместо кнопок в нижнем меню. */
+.lang-sel {
+  display: none;
+  height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(20, 20, 20, 0.72);
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.lang-sel option {
+  background: #fff;
+  color: #000;
+}
+
+.light .lang-sel {
+  background: rgba(0, 0, 0, 0.06);
+  color: #000;
+}
+
+@media (max-width: 760px) {
+  .hdr .lang-sel {
+    display: block;
+  }
+}
+
+@media (max-width: 1024px) {
+  .wp-tools .lang-sel {
+    display: block;
+  }
+
+  .dock a {
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .dock a {
+    padding: 0 8px;
+  }
+}
+
+/* ——— Главная: короткие контакты ——— */
+
+.hc .h2 {
+  margin-bottom: 28px;
+}
+
+.hc-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 44px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line-3);
+  border-bottom: 1px solid var(--line-3);
+}
+
+.hc-row a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  font-size: clamp(20px, 2.2vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.hc-row a:hover,
+.hc-note a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.hc-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 18px;
+  margin: 0;
+  padding-top: 12px;
+  color: var(--muted-2);
+  font-size: 15px;
+}
+
+.hc-note a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--fg);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ——— Страница «Контакты» ——— */
+
+.ct-phone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  margin-top: 28px;
+  font-size: clamp(28px, 4vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.ct-phone:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.light .contacts {
+  border-top-color: var(--line-3);
+}
+
+.ct-map {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  align-items: start;
+  padding: 96px var(--pad);
+  border-top: 1px solid var(--line-3);
+}
+
+.ct-map-txt p {
+  max-width: 480px;
+  margin: 20px 0 0;
+  color: var(--muted-2);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.ct-facts {
+  margin: 32px 0 0;
+}
+
+.ct-facts div {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line-3);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.ct-facts dt {
+  color: var(--muted);
+}
+
+.ct-facts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.ct-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.ct-map-box {
+  position: relative;
+  height: 440px;
+  overflow: hidden;
+  border: 1px solid var(--line-3);
+  border-radius: 20px;
+  background: #e4e1da;
+}
+
+.ct-map-box iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.ct-map-cover {
+  display: none;
+}
+
+/* На сенсорном экране карта не перехватывает прокрутку, пока по ней не нажали. */
+@media (hover: none) {
+  .ct-map-box:not(.live) iframe {
+    pointer-events: none;
+  }
+
+  .ct-map-box:not(.live) .ct-map-cover {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 0 16px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .ct-map-cover span {
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+  }
+}
+
+.ct-jobs {
+  padding: 20px var(--pad) 56px;
+  border-top: 1px solid var(--line-3);
+}
+
+/* ——— Страница «Студия»: площадка ——— */
+
+.st-space {
+  padding: 96px var(--pad) 72px;
+  border-top: 1px solid var(--line-3);
+}
+
+.st-lead {
+  max-width: 720px;
+  margin: 20px 0 0;
+  color: var(--muted-2);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.st-gal {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.st-gal img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.st-gal img:first-child {
+  grid-row: 1 / 3;
+  aspect-ratio: auto;
+}
+
+/* Место под фото зала: настоящие снимки пришлёт студия. */
+.st-ph {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  border: 1px dashed var(--muted);
+  border-radius: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.st-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 24px;
+  margin: 40px 0 0;
+}
+
+.st-facts div {
+  padding: 14px 0 18px;
+  border-top: 1px solid var(--line-3);
+}
+
+.st-facts dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.st-facts dd {
+  margin: 8px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.st-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 28px 0 40px;
+  color: var(--muted-2);
+  font-size: 15px;
+}
+
+@media (max-width: 860px) {
+  .ct-map {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 56px var(--pad);
+  }
+
+  .ct-map-box {
+    height: 320px;
+  }
+
+  .st-space {
+    padding: 56px var(--pad) 40px;
+  }
+
+  .st-gal {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .st-gal img:first-child {
+    grid-column: 1 / 3;
+    grid-row: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .st-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+  }
+
+  .ct-facts div {
+    grid-template-columns: 110px minmax(0, 1fr);
+  }
+}
+
+/* Длинное слово в заголовке помещается на экране 360 px. */
+@media (max-width: 760px) {
+  .about-hero h1 {
+    font-size: clamp(28px, 8.6vw, 40px);
+  }
+}

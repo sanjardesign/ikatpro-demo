@@ -618,5 +618,36 @@
     pick(0);
   }
 
+  // ——— Контакты: адрес в буфер, карта на телефоне двигается после нажатия ———
+  $$("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var el = $(b.getAttribute("data-copy"));
+      if (!el) return;
+      var text = el.textContent.trim();
+      var done = function () {
+        toast(window.t("ct.copied"));
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      } else {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          done();
+        } catch (err) {}
+        ta.remove();
+      }
+    });
+  });
+  var mapCover = $(".ct-map-cover");
+  if (mapCover) {
+    mapCover.addEventListener("click", function () {
+      mapCover.parentNode.classList.add("live");
+    });
+  }
+
   reveal(document);
 })();
