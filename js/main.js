@@ -567,7 +567,7 @@
         var y = window.scrollY;
         var nearEnd = y + window.innerHeight > document.documentElement.scrollHeight - 80;
         if (Math.abs(y - lastY) < 12) return;
-        dock.classList.toggle("away", y > lastY && y > 200 && !nearEnd);
+        dock.classList.toggle("away", y > lastY && y > 60 && !nearEnd);
         lastY = y;
       },
       { passive: true }

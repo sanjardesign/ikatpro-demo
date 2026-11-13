@@ -3752,3 +3752,236 @@ button.ftr-big {
     font-size: clamp(28px, 8.6vw, 40px);
   }
 }
+
+/* ═══════════ Правки после теста с десятью посетителями ═══════════ */
+
+/* ——— Форма ——— */
+
+/* Поле «Задача» в несколько строк: текст виден целиком. */
+.inp-area {
+  display: block;
+  height: auto;
+  min-height: 52px;
+  max-height: 132px;
+  padding: 14px 0 10px;
+  line-height: 1.4;
+  resize: none;
+  overflow-y: auto;
+}
+
+/* Рамка фокуса не наезжает на подпись поля. */
+.inp:focus-visible {
+  outline-offset: 2px;
+}
+
+/* Telegram в форме — запасной путь: ссылка рядом с главной кнопкой. */
+.form-actions {
+  align-items: center;
+}
+
+.form-actions .btn-line {
+  min-height: 44px;
+  padding: 0 8px;
+  border-color: transparent;
+  background: none;
+  color: #cfcfcf;
+  letter-spacing: 0.02em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-transform: none;
+}
+
+.form-actions .btn-line:hover {
+  background: none;
+  color: #fff;
+}
+
+.nb {
+  white-space: nowrap;
+}
+
+/* Телефон: форма плотнее, кнопки идут за полями и не закрывают третье поле. */
+@media (max-width: 760px) {
+  .form-actions {
+    position: static;
+    margin: 4px 0 0;
+    padding: 0;
+    background: none;
+  }
+
+  .form {
+    gap: 12px;
+  }
+
+  .form-lead {
+    margin-top: 6px;
+    font-size: 14px;
+  }
+
+  .kinds .chip {
+    min-height: 40px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .inp {
+    height: 44px;
+  }
+
+  .inp-area {
+    height: auto;
+    min-height: 44px;
+    padding: 10px 0 8px;
+  }
+}
+
+/* ——— Команда ——— */
+
+.team-hint {
+  display: none;
+}
+
+.person-lead {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 44px;
+  margin-top: 2px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 1100px) {
+  .team-title {
+    margin-bottom: 8px;
+  }
+
+  .team-hint {
+    display: block;
+    margin: 0 0 36px;
+    color: #9a9a9a;
+    font-size: 14px;
+  }
+
+  .team-grid {
+    grid-template-columns: minmax(0, 1fr) clamp(280px, 26vw, 460px);
+  }
+
+  .person-name {
+    color: #666;
+  }
+
+  .person-lead {
+    min-height: 32px;
+    margin-top: 4px;
+    color: #9a9a9a;
+    font-size: 12px;
+  }
+
+  .person.on .person-lead,
+  .person-lead:hover {
+    color: #fff;
+  }
+}
+
+/* ——— Контакты ——— */
+
+#map,
+#who {
+  scroll-margin-top: 84px;
+}
+
+.contact-ava {
+  width: 64px;
+  height: 64px;
+  margin: 10px 0 8px;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: center 18%;
+  filter: grayscale(1);
+}
+
+.ct-team {
+  margin: 0;
+  padding-top: 8px;
+}
+
+.ct-team a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ct-hero-r {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+.ct-hero-r a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ct-hero-r a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ct-hero-r .ct-phone {
+  min-height: 56px;
+  margin-top: 0;
+  font-size: clamp(28px, 4vw, 56px);
+  font-weight: 800;
+}
+
+/* Широкий экран: правая половина занята. */
+@media (min-width: 1100px) {
+  .ct-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 48px;
+    align-items: end;
+  }
+
+  .ct-hero-r {
+    margin-top: 0;
+  }
+
+  .st-head {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 48px;
+    align-items: end;
+  }
+
+  .st-head .st-lead {
+    margin-top: 0;
+    font-size: 19px;
+  }
+}
+
+/* ——— Страница работы: кнопка заявки видна в первом экране ——— */
+@media (min-width: 761px) {
+  .player {
+    max-height: calc(100svh - 300px);
+  }
+}
+
+/* Работа с несколькими версиями ролика: под плеером ещё ряд кнопок, плеер чуть ниже. */
+@media (min-width: 761px) {
+  section:has(> .episodes) > .player {
+    max-height: calc(100svh - 364px);
+  }
+}

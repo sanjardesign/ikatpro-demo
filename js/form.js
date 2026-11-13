@@ -31,7 +31,9 @@
     "</fieldset>" +
     field("name", t("form.name"), "text", "organization") +
     field("contact", t("form.contact"), "text", "tel") +
-    field("task", t("form.task"), "text", "off") +
+    '<label class="field" data-field="task">' + t("form.task") +
+    '<textarea class="inp inp-area" name="task" rows="1" autocomplete="off" required></textarea>' +
+    '<span class="field-err" aria-live="polite"></span></label>' +
     '<div class="form-actions">' +
     '<button type="submit" class="btn btn-white">' + t("form.send") + "</button>" +
     '<a class="btn btn-line" href="https://t.me/Ikat_pro_ad?start=site" target="_blank" rel="noopener" data-tg="form">' + t("form.tg") + "</a>" +
@@ -74,7 +76,7 @@
   }
 
   function focusables() {
-    return Array.prototype.filter.call(box.querySelectorAll("button, a[href], input"), function (el) {
+    return Array.prototype.filter.call(box.querySelectorAll("button, a[href], input, textarea"), function (el) {
       return !el.closest("[hidden]") && el.offsetParent !== null;
     });
   }
@@ -88,6 +90,7 @@
     var task = from && from.getAttribute && from.getAttribute("data-task");
     if (task && !form.task.value) form.task.value = task;
     modal.classList.add("open");
+    grow();
     modal.setAttribute("aria-hidden", "false");
     document.documentElement.style.overflow = "hidden";
     // Страница под окном замирает: карусель встаёт на паузу, плеер останавливается.
@@ -109,6 +112,7 @@
 
   function reset() {
     form.reset();
+    form.task.style.height = "";
     form.querySelectorAll(".field").forEach(function (f) {
       setErr(f, false);
     });
@@ -119,7 +123,7 @@
   }
 
   function isBad(f) {
-    var v = f.querySelector("input").value.trim();
+    var v = f.querySelector(".inp").value.trim();
     if (v.length < 2) return true;
     if (f.dataset.field !== "contact") return false;
     var digits = v.replace(/\D/g, "");
@@ -130,7 +134,7 @@
   }
 
   function setErr(f, bad) {
-    var inp = f.querySelector("input");
+    var inp = f.querySelector(".inp");
     f.classList.toggle("err", bad);
     inp.setAttribute("aria-invalid", String(bad));
     f.querySelector(".field-err").textContent = bad ? msgs[f.dataset.field] : "";
@@ -147,15 +151,22 @@
       var bad = isBad(f);
       setErr(f, bad);
       if (bad && ok) {
-        f.querySelector("input").focus();
+        f.querySelector(".inp").focus();
         ok = false;
       }
     });
     return ok;
   }
 
+  function grow() {
+    var a = form.task;
+    a.style.height = "auto";
+    a.style.height = Math.min(a.scrollHeight, 132) + "px";
+  }
+
   // Ошибка гаснет, как только поле исправили.
   form.addEventListener("input", function (e) {
+    if (e.target === form.task) grow();
     var f = e.target.closest(".field");
     if (f && f.classList.contains("err") && !isBad(f)) setErr(f, false);
   });
@@ -163,7 +174,7 @@
   // Заполненное с ошибкой поле подсказывает сразу, как только из него вышли.
   form.addEventListener("focusout", function (e) {
     var f = e.target.closest && e.target.closest(".field");
-    if (f && f.querySelector("input").value.trim() && isBad(f)) setErr(f, true);
+    if (f && f.querySelector(".inp").value.trim() && isBad(f)) setErr(f, true);
   });
 
   chips.forEach(function (c) {
@@ -192,9 +203,15 @@
     window.track("lead_form_submit", { type: kind });
 
     // Кто ответит и куда: человек видит, что заявка дошла.
-    thanks.querySelector(".thanks-who").textContent = t(kind === "Аренда студии" ? "who.studio" : "who.prod");
-    thanks.querySelector(".thanks-to").textContent =
-      t("kind." + KINDS.indexOf(kind)) + " · " + t("form.thanksTo") + ": " + lead.contact;
+    thanks.querySelector(".thanks-who").textContent = t(
+      kind === "Аренда студии" ? "who.studio" : kind === "Контент для соцсетей" ? "who.smm" : "who.prod"
+    );
+    var to = thanks.querySelector(".thanks-to");
+    to.textContent = t("kind." + KINDS.indexOf(kind)) + " · " + t("form.thanksTo") + ": ";
+    var nb = document.createElement("span");
+    nb.className = "nb";
+    nb.textContent = lead.contact;
+    to.appendChild(nb);
 
     // Кнопка показывает, что заявка уходит, и не даёт нажать дважды.
     var send = form.querySelector('button[type="submit"]');
