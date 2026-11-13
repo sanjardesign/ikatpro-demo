@@ -580,10 +580,9 @@
   // ——— Команда ———
   var team = $(".team");
   if (team) {
-    var bgs = $$(".team-bg img", team);
     var photos = $$(".team-photo img", team);
     var people = $$(".person", team);
-    // Имена и должности на узбекском и английском лежат в data-атрибутах кнопок.
+    // Имена и должности на узбекском и английском лежат в data-атрибутах.
     if (window.LANG !== "ru") {
       people.forEach(function (p) {
         $(".person-name", p).textContent = p.getAttribute("data-name-" + window.LANG);
@@ -591,15 +590,11 @@
       });
     }
     function pick(i) {
-      bgs.forEach(function (b, k) {
-        b.classList.toggle("on", k === i);
-      });
       photos.forEach(function (b, k) {
         b.classList.toggle("on", k === i);
       });
       people.forEach(function (p, k) {
         p.classList.toggle("on", k === i);
-        p.setAttribute("aria-pressed", String(k === i));
       });
     }
     people.forEach(function (p, i) {
@@ -609,10 +604,17 @@
       p.addEventListener("focus", function () {
         pick(i);
       });
-      p.addEventListener("click", function () {
-        pick(i);
-      });
     });
+    // Портрет справа есть только на широком экране: там имена доступны с клавиатуры.
+    var wide = window.matchMedia("(min-width: 1100px)");
+    function setWide() {
+      people.forEach(function (p) {
+        if (wide.matches) p.setAttribute("tabindex", "0");
+        else p.removeAttribute("tabindex");
+      });
+    }
+    if (wide.addEventListener) wide.addEventListener("change", setWide);
+    setWide();
     pick(0);
   }
 
