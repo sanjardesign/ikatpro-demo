@@ -3843,11 +3843,9 @@ button.ftr-big {
 
 .person-lead {
   align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  min-height: 44px;
-  margin-top: 2px;
+  display: block;
+  padding: 12px 0;
+  line-height: 1.4;
   color: #fff;
   font-size: 13px;
   font-weight: 600;
@@ -3876,8 +3874,7 @@ button.ftr-big {
   }
 
   .person-lead {
-    min-height: 32px;
-    margin-top: 4px;
+    padding: 8px 0;
     color: #9a9a9a;
     font-size: 12px;
   }
@@ -3984,4 +3981,8 @@ button.ftr-big {
   section:has(> .episodes) > .player {
     max-height: calc(100svh - 364px);
   }
+}
+
+.person-lead span:last-child {
+  white-space: nowrap;
 }
