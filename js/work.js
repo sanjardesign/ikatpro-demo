@@ -121,7 +121,6 @@
     '<button type="button" class="btn btn-white" data-form="' + formKind + '" data-task="' + esc(formTask) + '">' + t("wp.want") + ' <span class="arr" aria-hidden="true">→</span></button>' +
     '<a class="btn btn-line" href="' + tg + '" target="_blank" rel="noopener" data-tg="case">' + t("wp.tg") + "</a>" +
     '<a class="yt-link" href="https://www.youtube.com/watch?v=' + w.videos[ep].id + '" target="_blank" rel="noopener">' + t("wp.youtube") + "</a>" +
-    '<span class="wp-hint">' + t("wp.hint") + "</span>" +
     "</div></div>" +
     "</section>" +
     (frames.length

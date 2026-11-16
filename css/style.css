@@ -4543,3 +4543,127 @@ button.person-lead {
   padding-left: var(--pad);
   padding-right: var(--pad);
 }
+
+/* ——— Студия v2: бронь в первом экране, подробности раскрываются по нажатию ——— */
+.st-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.st-more {
+  padding: 120px var(--pad) 72px;
+}
+
+.accs {
+  display: grid;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.acc {
+  border-radius: 16px;
+  background: #0b0b0b;
+}
+
+.acc summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 24px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.acc summary::-webkit-details-marker {
+  display: none;
+}
+
+.acc summary:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  border-radius: 16px;
+}
+
+.acc-t {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.acc-s {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted-2);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Плюс, который поворачивается в крестик. */
+.acc-i {
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  transition: transform 0.25s ease, background-color 0.2s ease;
+}
+
+.acc-i::before,
+.acc-i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  margin: -1px 0 0 -7px;
+  border-radius: 1px;
+  background: #fff;
+}
+
+.acc-i::after {
+  transform: rotate(90deg);
+}
+
+.acc summary:hover .acc-i {
+  background: #262626;
+}
+
+.acc[open] .acc-i {
+  transform: rotate(45deg);
+}
+
+.acc .st-facts {
+  margin: 0;
+  padding: 4px 24px 28px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acc-i {
+    transition: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .st-more {
+    padding-top: 80px;
+  }
+
+  .acc summary {
+    padding: 20px;
+  }
+
+  .acc .st-facts {
+    padding: 4px 20px 24px;
+  }
+
+  .acc-t {
+    font-size: 18px;
+  }
+}
