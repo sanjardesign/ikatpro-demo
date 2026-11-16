@@ -364,14 +364,11 @@
       x.setAttribute("aria-pressed", String(x.getAttribute("data-filter") === filter));
     });
 
-    function tile(w, big, n) {
+    function tile(w, big) {
       return (
         '<a class="tile rv" href="work.html?w=' + w.slug + '" data-slug="' + w.slug + '">' +
         '<img src="' + (w.frame || w.cover || w.poster) + '" alt="' + esc(altOf(w)) + '" width="1280" height="720" loading="lazy" decoding="async">' +
-        // Подпись как у продакшн-студий: номер и категория сверху, крупный клиент и формат снизу.
-        '<span class="tile-top cap" aria-hidden="true"><span class="tile-n">' +
-        String(n).padStart(2, "0") +
-        '</span><span class="tile-tag">' + esc(tCat(w.cat)) + "</span></span>" +
+        // Подпись снизу: крупный клиент и формат.
         '<span class="tile-cap"><strong class="tile-client">' + esc(tName(w.client)) + "</strong>" +
         '<span class="tile-meta cap">' + esc(tKind(w.kind)) + " · " + w.dur + "</span></span>" +
         '<span class="tile-pv cap" aria-hidden="true">' + t("preview") + "</span>" +
@@ -405,7 +402,7 @@
         html +=
           '<div class="mosaic-row r' + n + '" data-stagger>' +
           row.map(function (w, k) {
-            return tile(w, n === 1, i + k + 1);
+            return tile(w, n === 1);
           }).join("") +
           "</div>";
         i += n;

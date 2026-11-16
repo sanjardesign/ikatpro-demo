@@ -4363,11 +4363,14 @@ button.person-lead {
   padding-top: 4px;
 }
 
-.home .ftr-info {
+/* Главная и «Контакты» уже показывают телефон, почту и адрес выше, подвал их не повторяет. */
+.home .ftr-info,
+.ct-page .ftr-info {
   display: none;
 }
 
-.home .ftr-top {
+.home .ftr-top,
+.ct-page .ftr-top {
   display: block;
 }
 
