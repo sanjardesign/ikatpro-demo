@@ -3986,3 +3986,557 @@ button.ftr-big {
 .person-lead span:last-child {
   white-space: nowrap;
 }
+
+/* ═══════════ Данные студии, тёмная тема везде, правки после теста на живом сайте ═══════════ */
+
+/* ——— Форма: кнопки идут за полями, поле «Задача» их не закрывает ——— */
+.form-actions {
+  position: static;
+  margin: 4px 0 0;
+  padding: 0;
+  background: none;
+}
+
+/* ——— Фильтры работ переносятся на вторую строку вместо прокрутки вбок ——— */
+@media (max-width: 760px) {
+  .filters {
+    flex-wrap: wrap;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .filters .chip {
+    min-height: 40px;
+    padding: 0 14px;
+  }
+}
+
+/* ——— Карта в тёмной теме ——— */
+.ct-map-box {
+  border-color: var(--line-3);
+  background: #111;
+}
+
+.ct-map-cover span {
+  background: #fff;
+  color: #000;
+}
+
+/* ——— Команда: плашка вместо фото, кнопка «написать» ——— */
+.person-ph,
+.tp-ph {
+  display: grid;
+  place-items: center;
+  background: #161616;
+  color: #5a5a5a;
+  font-size: 56px;
+  font-weight: 800;
+}
+
+.tp-ph {
+  position: absolute;
+  inset: 0;
+  font-size: 120px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.tp-ph.on {
+  opacity: 1;
+}
+
+@media (min-width: 1100px) {
+  .person-ph.person-img {
+    display: none;
+  }
+}
+
+button.person-lead {
+  padding: 12px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+@media (min-width: 1100px) {
+  button.person-lead {
+    padding: 8px 0;
+    font-size: 12px;
+  }
+}
+
+/* ——— Подвал: справа контакты ——— */
+.ftr-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 0 var(--pad) 40px;
+}
+
+.ftr-info a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted-2);
+  font-size: 16px;
+}
+
+.ftr-info a:hover {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ftr-info .ftr-phone {
+  color: var(--fg);
+  font-size: clamp(22px, 2.2vw, 34px);
+  font-weight: 800;
+}
+
+@media (min-width: 1100px) {
+  .ftr-top {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    align-items: end;
+  }
+
+  .ftr-info {
+    padding: 80px var(--pad) 64px 0;
+  }
+}
+
+/* ——— Страница работы: общая шапка, строка «назад» под ней ——— */
+.wp-page .hdr {
+  background: rgba(0, 0, 0, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.wp-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 92px var(--pad) 8px;
+}
+
+.wp-bar .wp-back {
+  flex: 1;
+  padding-left: 0;
+  border-left: 0;
+}
+
+@media (max-width: 760px) {
+  .wp-bar {
+    padding-top: 78px;
+  }
+}
+
+@media (min-width: 761px) {
+  .player,
+  section:has(> .episodes) > .player {
+    max-height: calc(100svh - 370px);
+  }
+
+  section:has(> .episodes) > .player {
+    max-height: calc(100svh - 430px);
+  }
+}
+
+/* ——— Студия: цифры в первом экране ——— */
+.st-kpi {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  margin: 40px 0 0;
+}
+
+.st-kpi div {
+  padding: 16px 0 18px;
+  border-top: 1px solid var(--line-3);
+}
+
+.st-kpi dt {
+  font-size: clamp(32px, 3.4vw, 52px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.st-kpi dd {
+  margin: 8px 0 0;
+  color: var(--muted-2);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media (min-width: 1100px) {
+  .st-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 56px;
+    align-items: end;
+  }
+
+  .st-kpi {
+    margin: 0;
+  }
+}
+
+/* ——— Студия: площадка, техника, условия ——— */
+.st-facts {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.st-facts dd {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.st-sub {
+  margin: 48px 0 0;
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.st-eq,
+.st-cond {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 20px;
+}
+
+/* ——— Тарифы ——— */
+.st-rates {
+  padding: 72px var(--pad) 72px;
+  border-top: 1px solid var(--line-3);
+}
+
+.tars {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.tar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid var(--line-3);
+  border-radius: 16px;
+  background: #0b0b0b;
+}
+
+.tar-main {
+  border-color: var(--accent-hi);
+  background: #0d141b;
+}
+
+.tar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tar h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.tar-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tar-price {
+  margin: 4px 0 0;
+  font-size: clamp(22px, 1.9vw, 30px);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.tar-desc {
+  margin: 0;
+  color: var(--muted-2);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.tar-pack {
+  margin: auto 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-3);
+  color: var(--muted-2);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.tar .btn {
+  align-self: stretch;
+}
+
+.st-note {
+  margin: 16px 0 0;
+  color: var(--muted-2);
+  font-size: 15px;
+}
+
+.st-rates .where {
+  margin-top: 40px;
+}
+
+@media (max-width: 1100px) {
+  .tars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .st-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .st-eq,
+  .st-cond {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .tars {
+    grid-template-columns: 1fr;
+  }
+
+  .st-eq,
+  .st-cond {
+    grid-template-columns: 1fr;
+  }
+
+  .st-rates {
+    padding: 56px var(--pad) 40px;
+  }
+}
+
+/* ——— Логотипы клиентов: без светлой плашки, чёрные SVG становятся белыми ——— */
+.client-logo:hover,
+.client-logo.np:hover {
+  background: transparent;
+}
+
+.client-logo.fx-inv .cl-w {
+  filter: invert(1);
+}
+
+.client-logo.fx-white .cl-w {
+  filter: brightness(0) invert(1);
+}
+
+.client-logo:not(:has(.cl-c)):hover .cl-w {
+  opacity: 1;
+}
+
+/* ——— Главная: контакты без разделительных линий; в подвале те же данные не повторяются ——— */
+.hc-row {
+  padding: 0;
+  border: 0;
+}
+
+.hc-note {
+  padding-top: 4px;
+}
+
+.home .ftr-info {
+  display: none;
+}
+
+.home .ftr-top {
+  display: block;
+}
+
+/* Подвал: строка Telegram идёт сразу под «Обсудить проект», линия только перед нижней строкой. */
+.ftr-tg {
+  border-top: 0;
+}
+
+/* ═══════════ Без разделительных линий ═══════════
+   Блоки отделяет воздух, крупный заголовок и подложка карточки, как на night.co.
+   Линии остались только у полей формы, кнопок-контуров и у нижней строки подвала. */
+
+.clients,
+.clients-label,
+.dirs,
+.dir,
+.dir + .dir,
+.letters,
+.letters-grid,
+.letter,
+.letter:nth-child(2n),
+.contacts,
+.contacts.hc,
+.ftr,
+.light .ftr,
+.team-gt,
+.team-photo,
+.about-cols,
+.about-col,
+.about-col + .about-col,
+.st-space,
+.st-rates,
+.st-kpi div,
+.st-facts div,
+.ct-facts div,
+.where,
+.tar,
+.tar-main,
+.tar-pack,
+.contact-grid,
+.contact,
+.light .contact-grid,
+.ct-map,
+.ct-map-box,
+.ct-jobs,
+.wp-page .hdr {
+  border: 0;
+}
+
+/* Ритм секций: вместо линии между блоками — большой отступ. */
+.dirs,
+.letters,
+.contacts,
+.st-space,
+.st-rates,
+.ct-map {
+  padding-top: 120px;
+}
+
+.about-cols {
+  gap: 48px;
+}
+
+.about-col,
+.about-col + .about-col {
+  padding: 28px 0 0;
+}
+
+.dirs {
+  gap: 48px;
+}
+
+.dir,
+.dir + .dir {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.letters-grid {
+  gap: 40px 32px;
+}
+
+.letter,
+.letter:nth-child(2n) {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.contact-grid {
+  gap: 40px;
+}
+
+/* Пары «подпись — значение» держатся отступами. */
+.st-kpi,
+.st-facts {
+  row-gap: 28px;
+}
+
+.st-kpi div,
+.st-facts div,
+.ct-facts div {
+  padding-top: 0;
+}
+
+.ct-facts {
+  display: grid;
+  gap: 18px;
+}
+
+.team-gt {
+  padding-top: 0;
+}
+
+.team-group + .team-group {
+  margin-top: 64px;
+}
+
+/* Карточки тарифов и портрет — подложкой, без рамки. */
+.tar {
+  background: #101010;
+}
+
+.tar-main {
+  background: #0f1d2b;
+}
+
+.tar-pack {
+  padding-top: 0;
+}
+
+.team-photo {
+  background: #101010;
+}
+
+.ct-jobs {
+  padding-top: 0;
+}
+
+@media (max-width: 860px) {
+  .dirs,
+  .letters,
+  .contacts,
+  .st-space,
+  .st-rates,
+  .ct-map {
+    padding-top: 80px;
+  }
+
+  .about-cols,
+  .dirs {
+    gap: 36px;
+  }
+
+  .contact {
+    padding-bottom: 0;
+  }
+
+  .letters-grid {
+    gap: 28px;
+  }
+}
+
+.letter:nth-child(3n + 2),
+.letter:nth-child(3n + 3) {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.dirs {
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}

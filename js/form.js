@@ -31,7 +31,7 @@
     "</fieldset>" +
     field("name", t("form.name"), "text", "organization") +
     field("contact", t("form.contact"), "text", "tel") +
-    '<label class="field" data-field="task">' + t("form.task") +
+    '<label class="field" data-field="task"><span class="field-l">' + t("form.task") + "</span>" +
     '<textarea class="inp inp-area" name="task" rows="1" autocomplete="off" required></textarea>' +
     '<span class="field-err" aria-live="polite"></span></label>' +
     '<div class="form-actions">' +
@@ -71,8 +71,13 @@
       c.setAttribute("aria-pressed", String(c.dataset.kind === kind));
     });
     if (kind) modal.querySelector(".kinds-err").textContent = "";
-    // Для аренды отвечает администратор студии, для остального — продюсер.
-    modal.querySelector(".form-lead").textContent = t(kind === "Аренда студии" ? "form.leadStudio" : "form.lead");
+    // Подзаголовок называет того, кто ответит; у аренды свой заголовок и подсказка к задаче.
+    var studio = kind === "Аренда студии";
+    modal.querySelector(".form-lead").textContent = t(
+      !kind ? "form.lead" : studio ? "form.leadStudio" : kind === "Контент для соцсетей" ? "form.leadSmm" : "form.leadProd"
+    );
+    modal.querySelector("#form-title").textContent = t(studio ? "form.titleStudio" : "form.title");
+    modal.querySelector('[data-field="task"] .field-l').textContent = t(studio ? "form.taskStudio" : "form.task");
   }
 
   function focusables() {

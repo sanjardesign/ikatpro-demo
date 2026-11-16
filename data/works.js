@@ -261,19 +261,25 @@ window.workBySlug = function (slug) {
 // noPlate: цветной логотип и так хорошо виден на чёрном — без светлой плашки при наведении.
 // square: знак почти квадратный — показываем чуть крупнее, чтобы по весу совпадал со словесными логотипами.
 window.CLIENTS = [
-  { name: "Komatsu", logo: null },
+  // fx: inv — чёрный логотип выворачивается в белый, white — любой цвет становится белым. mono — без цветной версии при наведении.
+  { name: "Komatsu", logo: "assets/clients/komatsu.svg", mono: true, fx: "white" },
   { name: "Asakabank", logo: "assets/clients/asakabank.png" },
   { name: "Indorama", logo: "assets/clients/indorama.png" },
-  { name: "Mannol", logo: "assets/clients/mannol.png", noPlate: true },
+  { name: "Mannol", logo: "assets/clients/mannol.png" },
   { name: "AION", logo: "assets/clients/aion.png", square: true },
   { name: "Biolife", logo: "assets/clients/biolife.png" },
   { name: "Saxovat", logo: "assets/clients/saxovat.png", square: true },
+  { name: "Merci", logo: "assets/clients/merci.svg", mono: true, fx: "inv" },
+  { name: "Eclair", logo: "assets/clients/eclair.svg", mono: true, fx: "inv" },
   { name: "N'Medov", logo: "assets/clients/nmedov.png", square: true },
+  { name: "Avangard", logo: "assets/clients/avangard.svg", mono: true, fx: "inv", square: true },
+  { name: "Rozmetov", logo: "assets/clients/rozmetov.svg", mono: true, square: true },
+  { name: "Crafers", logo: "assets/clients/crafers.svg", mono: true },
+  { name: "Krusto", logo: "assets/clients/krusto.svg", mono: true, fx: "inv", square: true },
+  { name: "L'amour", logo: "assets/clients/lamour.svg", mono: true },
   { name: "SCC", logo: "assets/clients/scc.png", square: true },
-  { name: "Merci", logo: null },
-  { name: "Eclair", logo: null },
+  { name: "Bars", logo: "assets/clients/bars.svg", fx: "white" },
   { name: "Landor", logo: null },
-  { name: "Avangard", logo: null },
-  { name: "Open Budget", logo: null },
+  { name: "Open Budget", logo: "assets/clients/openbudget.svg", mono: true },
   { name: "HPC", logo: null },
 ];
