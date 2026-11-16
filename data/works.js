@@ -273,7 +273,7 @@ window.CLIENTS = [
   { name: "Eclair", logo: "assets/clients/eclair.svg", mono: true, fx: "inv" },
   { name: "N'Medov", logo: "assets/clients/nmedov.png", square: true },
   { name: "Avangard", logo: "assets/clients/avangard.svg", mono: true, fx: "inv", square: true },
-  { name: "Rozmetov", logo: "assets/clients/rozmetov.svg", mono: true, square: true },
+  { name: "Rozmetov", logo: "assets/clients/rozmetov.svg", square: true },
   { name: "Crafers", logo: "assets/clients/crafers.svg", mono: true },
   { name: "Krusto", logo: "assets/clients/krusto.svg", mono: true, fx: "inv", square: true },
   { name: "L'amour", logo: "assets/clients/lamour.svg", mono: true },

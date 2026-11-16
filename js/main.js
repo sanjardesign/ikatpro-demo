@@ -316,6 +316,9 @@
   // ——— Бегущая строка клиентов ———
   var mq = $(".mq-track");
   if (mq) {
+    // Версия файлов из адреса main.js: после выкладки браузер и Cloudflare берут свежие логотипы.
+    var ms = document.querySelector('script[src*="js/main.js"]');
+    var av = ms && ms.src.match(/v=(\d+)/) ? "?v=" + ms.src.match(/v=(\d+)/)[1] : "";
     // Разделитель — капля из логотипа IKAT PRO.
     var drop =
       '<svg class="drop" viewBox="0 0 90 140" aria-hidden="true" focusable="false"><path transform="translate(0 -92.7)" d="M44.8842 231.914C38.1457 206.103 0.384598 199.492 0.00317654 166.053C-0.378245 128.418 33.6958 131.978 44.8842 93.4527C56.0725 132.105 90.1458 128.418 89.7644 166.053C89.383 199.619 51.6226 206.103 44.8842 231.914Z"/></svg>';
@@ -324,8 +327,8 @@
     var group = (window.CLIENTS || [])
       .map(function (c) {
         var item = c.logo
-          ? '<span class="client-logo' + (c.square ? " sq" : "") + (c.fx ? " fx-" + c.fx : "") + '"><img class="cl-w" src="' + c.logo + '" alt="' + esc(c.name) + '" height="40" decoding="async">' +
-            (c.mono ? "" : '<img class="cl-c" src="' + c.logo.replace("assets/clients/", "assets/clients/color/") + '" alt="" aria-hidden="true" height="40" loading="lazy" decoding="async">') +
+          ? '<span class="client-logo' + (c.square ? " sq" : "") + (c.fx ? " fx-" + c.fx : "") + '"><img class="cl-w" src="' + c.logo + av + '" alt="' + esc(c.name) + '" height="40" decoding="async">' +
+            (c.mono ? "" : '<img class="cl-c" src="' + c.logo.replace("assets/clients/", "assets/clients/color/") + av + '" alt="" aria-hidden="true" height="40" loading="lazy" decoding="async">') +
             "</span>"
           : '<span class="client-name">' + esc(c.name) + "</span>";
         return item + drop;
